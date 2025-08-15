@@ -1,3 +1,17 @@
+.btn-primary {
+    background: var(--gradient-gold);
+    color: var(--white);
+    border: none;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background: var(--gradient-red);
+    color: var(--white);
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: var(--shadow-heavy);
+    text-decoration: none;
+}
 /* ===== VARIABLES CSS ===== */
 :root {
     /* Colores principales basados en el logo */
