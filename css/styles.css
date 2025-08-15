@@ -115,10 +115,28 @@ body {
 
 .floating-card img {
     width: 100%;
-    height: 400px;
+    max-width: 350px;
+    height: 220px;
     object-fit: cover;
     display: block;
+    border-radius: 2rem;
 }
+/* Responsive ajustes para móviles */
+@media (max-width: 900px) {
+    .hero-content {
+        flex-direction: column;
+        gap: 1.5rem;
+        min-height: 0;
+    }
+    .floating-card img {
+        max-width: 180px;
+        height: 120px;
+    }
+    .hero-title {
+        font-size: 1.5rem;
+    }
+
+    }
 
 .card-badge {
     position: absolute;
@@ -280,14 +298,15 @@ body {
 
 .card-title {
     font-family: var(--font-primary);
-    font-size: 1.5rem;
-    font-weight: 600;
+        font-size: 2.3rem;
+        margin-bottom: 1rem;
     margin-bottom: 1rem;
     color: var(--text-dark);
 }
 
 .card-description {
     color: var(--text-light);
+    margin-top: 1.5rem;
     margin-bottom: 1.5rem;
     line-height: 1.6;
 }
@@ -958,13 +977,14 @@ body {
 
 /* ===== HERO SECTION ===== */
 .hero {
-    min-height: 100vh;
+    min-height: 60vh;
     background: linear-gradient(135deg, var(--cream-white) 0%, #F5E6D3 100%);
     display: flex;
     align-items: center;
     position: relative;
     overflow: hidden;
     padding-top: 100px;
+    padding-bottom: 40px;
 }
 
 .hero-overlay {
@@ -978,15 +998,17 @@ body {
 }
 
 .hero-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
+    display: flex;
+    flex-direction: row;
     align-items: center;
-    max-width: var(--container-max-width);
+    justify-content: center;
+    gap: 2.5rem;
+    max-width: 1100px;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 1rem;
     position: relative;
     z-index: 2;
+    min-height: 350px;
 }
 
 .hero-text {
@@ -1010,15 +1032,15 @@ body {
 }
 
 .hero-subtitle {
-    font-size: 1.3rem;
-    margin-bottom: 2.5rem;
-    color: var(--text-light);
+    font-size: 1.05rem;
+    margin-top: 0.7rem;
+    margin-bottom: 1.2rem;
     line-height: 1.8;
 }
 
 .hero-buttons {
     display: flex;
-    gap: 1.5rem;
+    gap: 1rem;
     flex-wrap: wrap;
 }
 
@@ -1034,4 +1056,48 @@ body {
     align-items: center;
     gap: 0.5rem;
     box-shadow: var(--shadow-medium);
+}
+
+/* Centrado y tamaño de la imagen en la sección hero */
+.hero-image {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        min-height: 240px;
+    }
+
+    .floating-card {
+        max-width: 270px;
+        margin: 0 auto;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+}
+
+.floating-card img {
+        width: 100%;
+        max-width: 500px;
+        height: 350px;
+        object-fit: cover;
+        display: block;
+        border-radius: 2rem;
+        margin: 0 auto;
+}
+
+/* Responsive ajustes para móviles */
+@media (max-width: 900px) {
+    .hero-content {
+        flex-direction: column;
+        gap: 1.5rem;
+        min-height: 0;
+    }
+    .floating-card img {
+        max-width: 380px;
+        height: 180px;
+    }
+    .hero-title {
+        font-size: 1.5rem;
+    }
 }
