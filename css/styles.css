@@ -134,6 +134,7 @@ body {
     }
     .hero-title {
         font-size: 1.5rem;
+        margin-top: 2.5rem;
     }
 
     }
@@ -307,6 +308,7 @@ body {
 .card-description {
     color: var(--text-light);
     margin-top: 1.5rem;
+    margin-top: 2.5rem;
     margin-bottom: 1.5rem;
     line-height: 1.6;
 }
@@ -1040,8 +1042,10 @@ body {
 
 .hero-buttons {
     display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
+    gap: 1.2rem;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .btn-primary,
@@ -1050,7 +1054,7 @@ body {
     border-radius: 50px;
     text-decoration: none;
     font-weight: 600;
-    font-size: 1.1rem;
+    font-size: 0.95rem;
     transition: all 0.3s ease;
     display: inline-flex;
     align-items: center;
@@ -1099,5 +1103,6 @@ body {
     }
     .hero-title {
         font-size: 1.5rem;
+        margin-top: 2.5rem;
     }
 }
