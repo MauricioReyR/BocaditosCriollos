@@ -985,7 +985,8 @@ body {
     align-items: center;
     position: relative;
     overflow: hidden;
-    padding-top: 100px;
+    /* Ajuste automático según la altura del navbar */
+    padding-top: clamp(80px, 10vw, 120px);
     padding-bottom: 40px;
 }
 
