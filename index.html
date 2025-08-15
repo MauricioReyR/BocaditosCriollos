@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Bocaditos Criollos - Auténtica comida tradicional colombiana. Empanadas, fritos y sabores caseros en Bogotá.">
+    <meta name="keywords" content="empanadas, fritos, comida colombiana, tradicional, bocaditos criollos, bogotá">
+    <title>Bocaditos Criollos - Comida Tradicional Colombiana en Bogotá</title>
+    
+    <!-- Fuentes -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- Iconos -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Estilos CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#inicio" class="logo">
+                <img src="images/Logo.jpg" alt="Logo Bocaditos Criollos" style="height:6.0rem; width:auto; vertical-align:middle; margin-right:0.5rem;">
+                Bocaditos Criollos
+            </a>
+            
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#inicio" class="nav-link">Inicio</a></li>
+                <li><a href="#combos" class="nav-link">Nuestros Combos</a></li>
+                <li><a href="#contacto" class="nav-link">Contacto</a></li>
+                <li><a href="#historia" class="nav-link">Nuestra Historia</a></li>
+            </ul>
+            
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sección Inicio -->
+    <section id="inicio" class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">
+                    <span class="highlight">Auténticos</span> Sabores 
+                    <span class="highlight">Tradicionales</span> Colombianos
+                </h1>
+                <p class="hero-subtitle">
+                    Descubre nuestros deliciosos <strong>fritos tradicionales</strong>, 
+                    <strong>empanadas caseras</strong> y la mejor comida <strong>criolla</strong> 
+                    de Bogotá. Sabores que evocan tradición familiar.
+                </p>
+                
+                <div class="hero-buttons">
+                    <a href="https://wa.me/573138513658?text=¡Hola! Me interesa conocer más sobre sus deliciosos bocaditos criollos 🍴" 
+                       class="btn-primary" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                        Pedir por WhatsApp
+                    </a>
+                    <a href="#combos" class="btn-secondary">Ver Nuestros Combos</a>
+                </div>
+            </div>
+            
+            <div class="hero-image">
+                <div class="floating-card">
+                    <img src="images/empanadas-hero.jpg" alt="Empanadas tradicionales colombianas" />
+                    <!-- card-badge eliminado -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- Elementos decorativos -->
+        <div class="floating-elements">
+            <div class="floating-icon" style="top: 20%; left: 10%;">
+                <i class="fas fa-pepper-hot"></i>
+            </div>
+            <div class="floating-icon" style="top: 60%; right: 15%;">
+                <i class="fas fa-leaf"></i>
+            </div>
+            <div class="floating-icon" style="bottom: 20%; left: 20%;">
+                <i class="fas fa-heart"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Combos -->
+    <section id="combos" class="combos-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Nuestros Deliciosos Combos</h2>
+                <p class="section-subtitle">Combinaciones perfectas de sabores tradicionales</p>
+            </div>
+            
+            <div class="combos-grid">
+                <!-- Combo 1 -->
+                <div class="combo-card">
+                    <div class="card-image">
+                        <img src="images/combo-empanadas.jpg" alt="Combo Empanadas Tradicionales" />
+                        <div class="card-overlay">
+                            <button class="btn-card" onclick="contactarWhatsApp('Combo Empanadas Tradicionales')">
+                                <i class="fab fa-whatsapp"></i> Pedir
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Combo Empanadas Tradicionales</h3>
+                        <p class="card-description">
+                            4 empanadas criollas de carne o pollo, acompañadas de ají casero 
+                            y gaseosa. El sabor auténtico de la abuela.
+                        </p>
+                        <div class="card-price">$18.000</div>
+                        <div class="card-features">
+                            <span><i class="fas fa-clock"></i> 15 min</span>
+                            <span><i class="fas fa-fire"></i> Recién hechas</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Combo 2 -->
+                <div class="combo-card">
+                    <div class="card-image">
+                        <img src="images/combo-fritos.jpg" alt="Combo Fritos Mixtos" />
+                        <div class="card-overlay">
+                            <button class="btn-card" onclick="contactarWhatsApp('Combo Fritos Mixtos')">
+                                <i class="fab fa-whatsapp"></i> Pedir
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Combo Fritos Mixtos</h3>
+                        <p class="card-description">
+                            Papas rellenas, buñuelos, carimañolas y deditos de queso. 
+                            Una explosión de sabores tradicionales.
+                        </p>
+                        <div class="card-price">$22.000</div>
+                        <div class="card-features">
+                            <span><i class="fas fa-clock"></i> 20 min</span>
+                            <span><i class="fas fa-award"></i> Más vendido</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Combo 3 -->
+                <div class="combo-card">
+                    <div class="card-image">
+                        <img src="images/combo-familiar.jpg" alt="Combo Familiar Criollo" />
+                        <div class="card-overlay">
+                            <button class="btn-card" onclick="contactarWhatsApp('Combo Familiar Criollo')">
+                                <i class="fab fa-whatsapp"></i> Pedir
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Combo Familiar Criollo</h3>
+                        <p class="card-description">
+                            Perfecto para compartir: 6 empanadas, fritos surtidos, 
+                            arepas de chócolo y bebidas para toda la familia.
+                        </p>
+                        <div class="card-price">$35.000</div>
+                        <div class="card-features">
+                            <span><i class="fas fa-users"></i> 4-6 personas</span>
+                            <span><i class="fas fa-heart"></i> Familiar</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Combo 4 -->
+                <div class="combo-card">
+                    <div class="card-image">
+                        <img src="images/combo-ejecutivo.jpg" alt="Combo Ejecutivo Express" />
+                        <div class="card-overlay">
+                            <button class="btn-card" onclick="contactarWhatsApp('Combo Ejecutivo Express')">
+                                <i class="fab fa-whatsapp"></i> Pedir
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Combo Ejecutivo Express</h3>
+                        <p class="card-description">
+                            Ideal para la oficina: 2 empanadas gourmet, jugo natural 
+                            y postre casero. Listo en tiempo récord.
+                        </p>
+                        <div class="card-price">$15.000</div>
+                        <div class="card-features">
+                            <span><i class="fas fa-bolt"></i> Express</span>
+                            <span><i class="fas fa-briefcase"></i> Ejecutivo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Contacto -->
+    <section id="contacto" class="contact-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Encuéntranos</h2>
+                <p class="section-subtitle">Visítanos y disfruta de nuestros sabores tradicionales</p>
+            </div>
+            
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="info-card">
+                        <div class="info-header">
+                            <i class="fas fa-store"></i>
+                            <h3>Nuestro Punto de Venta</h3>
+                        </div>
+                        
+                        <div class="info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <strong>Dirección:</strong>
+                                <p>Carrera 87 #68-91 Esquina, Barrio Floridablanca<br>Bogotá, Colombia</p>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <strong>Teléfono:</strong>
+                                <p>+57 350 - 8361131</p>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <i class="fab fa-whatsapp"></i>
+                            <div>
+                                <strong>WhatsApp:</strong>
+                                <p>+57 313 851 3658</p>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <strong>Horarios:</strong>
+                                <p>Lunes a Sábado: 9:00 AM - 8:00 PM<br>Domingo: 10:00 AM - 6: PM</p>
+                            </div>
+                        </div>
+                        
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                            <a href="https://wa.me/573138513658" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-map">
+                    <div class="map-container" style="text-align:center; margin:2rem 0;">
+                        <iframe src="https://www.google.com/maps?q=Carrera+87+%2368-91,+Bogot%C3%A1,+Colombia&output=embed" width="600" height="450" style="border:0;"   allowfullscreen="" loading="lazy"></iframe>
+                    </div> <!-- map-container -->
+                </div> <!-- contact-map -->
+            </div> <!-- contact-content -->
+        </div> <!-- container -->
+    </section>
+
+    <!-- Sección Historia -->
+    <section id="historia" class="history-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Nuestra Historia</h2>
+                <p class="section-subtitle">Tradición familiar que trasciende generaciones</p>
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-image">
+                            <img src="images/historia-1.jpg" alt="Inicios de Bocaditos Criollos" />
+                            <div class="timeline-badge">
+                                <i class="fas fa-seedling"></i>
+                            </div>
+                        </div>
+                        <div class="timeline-text">
+                            <div class="timeline-year">1995</div>
+                            <h3>Los Inicios</h3>
+                            <p>
+                                Todo comenzó en la cocina de la abuela María, quien con sus 
+                                manos expertas y recetas heredadas de generación en generación, 
+                                comenzó a preparar las empanadas más deliciosas del barrio. 
+                                Lo que inició como un pequeño negocio familiar se convirtió 
+                                en una pasión por preservar los sabores tradicionales colombianos.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content reverse">
+                        <div class="timeline-text">
+                            <div class="timeline-year">2005</div>
+                            <h3>Crecimiento y Tradición</h3>
+                            <p>
+                                Con el pasar de los años, la familia creció y con ella, 
+                                nuestra oferta gastronómica. Incorporamos los fritos tradicionales 
+                                que tanto caracterizaban las tardes bogotanas: buñuelos, 
+                                carimañolas y papas rellenas que conquistaron el corazón 
+                                de nuestros clientes fieles.
+                            </p>
+                        </div>
+                        <div class="timeline-image">
+                            <img src="images/historia-2.jpg" alt="Expansión del negocio" />
+                            <div class="timeline-badge">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-image">
+                            <img src="images/historia-3.jpg" alt="Local actual" />
+                            <div class="timeline-badge">
+                                <i class="fas fa-home"></i>
+                            </div>
+                        </div>
+                        <div class="timeline-text">
+                            <div class="timeline-year">2015</div>
+                            <h3>Nuestro Hogar</h3>
+                            <p>
+                                Abrimos nuestro local actual en el corazón de Bogotá, 
+                                un espacio cálido y acogedor donde cada cliente se siente 
+                                como en familia. Aquí, cada bocadito es preparado con el 
+                                mismo amor y dedicación de siempre, manteniendo viva 
+                                la tradición culinaria colombiana.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content reverse">
+                        <div class="timeline-text">
+                            <div class="timeline-year">2024</div>
+                            <h3>Innovación con Tradición</h3>
+                            <p>
+                                Hoy en día, combinamos la tradición familiar con la 
+                                innovación tecnológica. Mantenemos nuestras recetas 
+                                ancestrales mientras facilitamos el pedido a través 
+                                de WhatsApp y redes sociales, llevando nuestros sabores 
+                                auténticos a más familias bogotanas.
+                            </p>
+                        </div>
+                        <div class="timeline-image">
+                            <video autoplay muted loop>
+                                <source src="images/bocaditos-proceso.mp4" type="video/mp4">
+                                <img src="images/historia-4.jpg" alt="Actualidad del negocio" />
+                            </video>
+                            <div class="timeline-badge">
+                                <i class="fas fa-rocket"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="images/Logo.jpg" alt="Logo Bocaditos Criollos" style="height:2.2rem; width:auto; vertical-align:middle; margin-right:0.5rem;">
+                        <span>Bocaditos Criollos</span>
+                    </div>
+                    <p class="footer-description">
+                        Preservando los sabores tradicionales colombianos 
+                        con amor y dedicación desde 1995.
+                    </p>
+                    <div class="footer-social">
+                        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/573138513658" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul class="footer-links">
+                        <li><a href="#inicio">Inicio</a></li>
+                        <li><a href="#combos">Nuestros Combos</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                        <li><a href="#historia">Nuestra Historia</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <div class="footer-contact">
+                        <p><i class="fas fa-map-marker-alt"></i> Carrera 87 65 91, Bogotá</p>
+                        <p><i class="fas fa-phone"></i> +57 313 8361131</p>
+                        <p><i class="fab fa-whatsapp"></i> +57 313 8361131</p>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Horarios</h4>
+                    <div class="footer-schedule">
+                        <p>Lunes - Sábado: 9:00 AM - 8:00 PM</p>
+                        <p>Domingo: Cerrado</p>
+                    </div>
+                    <a href="https://wa.me/573138513658?text=¡Hola! Quiero hacer un pedido 🍴" 
+                       class="footer-whatsapp" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                        Pedir por WhatsApp
+                    </a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Bocaditos Criollos. Todos los derechos reservados. | Diseñado con ❤️ para preservar la tradición</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botón WhatsApp flotante -->
+    <a href="https://wa.me/573138513658?text=¡Hola! Me interesa conocer más sobre Bocaditos Criollos 🍴" 
+       class="whatsapp-float" target="_blank" aria-label="Contactar por WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
+    <script src="js/hero-slider.js"></script>
+</body>
+</html>
