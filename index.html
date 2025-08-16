@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Bocaditos Criollos - Auténtica comida tradicional colombiana. Empanadas, fritos y sabores caseros en Bogotá.">
     <meta name="keywords" content="empanadas, fritos, comida colombiana, tradicional, bocaditos criollos, bogotá">
-    <title>Bocaditos Criollos - Comida Tradicional Colombiana en Bogotá</title>
+    <title>Bocaditos Criollos - Fritos Tradicionales</title>
     
     <!-- Fuentes -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="css/styles.css">
     
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="icon" type="image/png" href="images/favicon.ico">
 </head>
 <body>
     <!-- Navbar -->
@@ -79,7 +79,7 @@
             </div>
         </div>
         
-        <!-- Elementos decorativos -->
+    <!-- Elementos decorativos -->
         <div class="floating-elements">
             <div class="floating-icon" style="top: 20%; left: 10%;">
                 <i class="fas fa-pepper-hot"></i>
@@ -97,13 +97,13 @@
     <section id="combos" class="combos-section">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Nuestros Deliciosos Combos</h2>
+                <h2 class="section-title">Nuestros Combos</h2>
                 <p class="section-subtitle">Combinaciones perfectas de sabores tradicionales</p>
             </div>
             
-            <div class="combos-grid">
+            <div class="combos-grid" id="combos-grid">
                 <!-- Combo 1 -->
-                <div class="combo-card">
+                <div class="combo-card active">
                     <div class="card-image">
                         <img src="images/Pipian.jpg" alt="Combo Empanadas Tradicionales" />
                         <div class="card-overlay">
@@ -113,46 +113,45 @@
                         </div>
                     </div>
                     <div class="card-content">
-                        <h3 class="card-title">Combo Empanadas Tradicionales</h3>
+                        <h3 class="card-title">Combo Empanadas Tradicionales.</h3>
                         <p class="card-description">
                             12 crujientes y deliciosas empanadas vallunas 🤤 con aji criollo🥵 y salsa casera tipo chimichurri😏. Disfruta esta delicia en casa🏡, calientitas y crujientes
                         </p>
-                        <div class="card-price">$18.000</div>
+                        <div class="card-price">$33.000</div>
                         <div class="card-features">
-                            <span><i class="fas fa-clock"></i> 15 min</span>
-                            <span><i class="fas fa-fire"></i> Recién hechas</span>
+                            <span><i class="fas fa-clock"></i> 90 min</span>
+                            <span><i class="fas fa-fire"></i> Tradición </span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Combo 2 -->
-                <div class="combo-card">
+                <div class="combo-card active">
                     <div class="card-image">
-                        <img src="images/combo-fritos.jpg" alt="Combo Fritos Mixtos" />
+                        <img src="images/Vegetarianas.jpg" alt="Combo Vegetariano" />
                         <div class="card-overlay">
-                            <button class="btn-card" onclick="contactarWhatsApp('Combo Fritos Mixtos')">
+                            <button class="btn-card" onclick="contactarWhatsApp('Combo Vegetariano')">
                                 <i class="fab fa-whatsapp"></i> Pedir
                             </button>
                         </div>
                     </div>
                     <div class="card-content">
-                        <h3 class="card-title">Combo Fritos Mixtos</h3>
+                        <h3 class="card-title">Combo veggie.</h3>
                         <p class="card-description">
-                            Papas rellenas, buñuelos, carimañolas y deditos de queso. 
-                            Una explosión de sabores tradicionales.
+                             Disfruta de 8 deliciosos nuggets de lenteja con 🧄ajo y especias🤤. Calientitos y listos para disfrutar acompañados con papa salada y nuestra salsa casera tipo chimichurri 🍽. Haz tu pedido. No quedes sin probarlos 
                         </p>
-                        <div class="card-price">$22.000</div>
+                        <div class="card-price">$35.000</div>
                         <div class="card-features">
-                            <span><i class="fas fa-clock"></i> 20 min</span>
-                            <span><i class="fas fa-award"></i> Más vendido</span>
+                            <span><i class="fas fa-clock"></i> 90 min</span>
+                            <span><i class="fas fa-award"></i> Vegetariano </span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Combo 3 -->
-                <div class="combo-card">
+                <div class="combo-card active">
                     <div class="card-image">
-                        <img src="images/combo-familiar.jpg" alt="Combo Familiar Criollo" />
+                        <img src="images/Arepas_huevo_Trisafica.jpg" alt="MEGACOMBO" />
                         <div class="card-overlay">
                             <button class="btn-card" onclick="contactarWhatsApp('Combo Familiar Criollo')">
                                 <i class="fab fa-whatsapp"></i> Pedir
@@ -160,10 +159,9 @@
                         </div>
                     </div>
                     <div class="card-content">
-                        <h3 class="card-title">Combo Familiar Criollo</h3>
+                        <h3 class="card-title">MEGACOMBO</h3>
                         <p class="card-description">
-                            Perfecto para compartir: 6 empanadas, fritos surtidos, 
-                            arepas de chócolo y bebidas para toda la familia.
+                            ⚠ 6 crujientes y deliciosas😋 empanadas tradicionales y 4 arepas de huevo 🍳 trifasicas con pollo 🍗 desmechado y carne 🥩 desmechada. Se preparan  y salen calientitos para despacho 🏍. Los entregamos con aji criollo 🥵y salsa casera tipo chimichurri.
                         </p>
                         <div class="card-price">$35.000</div>
                         <div class="card-features">
@@ -228,7 +226,7 @@
                             <i class="fas fa-phone"></i>
                             <div>
                                 <strong>Teléfono:</strong>
-                                <p>+57 350 - 8361131</p>
+                                <p>+57 313 - 8513658</p>
                             </div>
                         </div>
                         
@@ -244,7 +242,7 @@
                             <i class="fas fa-clock"></i>
                             <div>
                                 <strong>Horarios:</strong>
-                                <p>Lunes a Sábado: 9:00 AM - 8:00 PM<br>Domingo: 10:00 AM - 6: PM</p>
+                                <p>Lunes a Sábado: 9:00 AM - 8:00 PM</p>
                             </div>
                         </div>
                         
@@ -436,5 +434,7 @@
     <!-- JavaScript -->
     <script src="js/main.js"></script>
     <script src="js/hero-slider.js"></script>
+
+
 </body>
 </html>

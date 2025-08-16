@@ -596,3 +596,62 @@ const additionalStyles = `
 `;
 
 document.head.insertAdjacentHTML('beforeend', additionalStyles);
+
+// ===== CONTROL DE TARJETAS DE COMBOS (HOME Y SECCIÓN) =====
+function getMaxCombosToShow() {
+    if (window.innerWidth < 768) return 1; // móviles
+    if (window.innerWidth < 1200) return 2; // tablets
+    return 3; // escritorio
+}
+function mostrarCombosHome() {
+    var combosGrid = document.querySelector('.combos-grid');
+    if (combosGrid) {
+        var cards = combosGrid.querySelectorAll('.combo-card');
+        var activeCards = combosGrid.querySelectorAll('.combo-card.active');
+        var max = getMaxCombosToShow();
+        // Ocultar todas por defecto
+        for (let i = 0; i < cards.length; i++) {
+            cards[i].style.display = 'none';
+        }
+        // Mostrar solo las activas, hasta el máximo permitido
+        for (let i = 0; i < activeCards.length && i < max; i++) {
+            activeCards[i].style.display = '';
+        }
+    }
+}
+function mostrarTodosCombos() {
+    var combosGrid = document.querySelector('.combos-grid');
+    if (combosGrid) {
+        var cards = combosGrid.querySelectorAll('.combo-card');
+        for (let i = 0; i < cards.length; i++) {
+            cards[i].style.display = '';
+        }
+    }
+}
+// Mostrar solo combos activos en el home al cargar y al redimensionar
+function activarHomeCombos() {
+    mostrarCombosHome();
+    // Si el hash es #combos, mostrar todos
+    if (window.location.hash === '#combos') {
+        mostrarTodosCombos();
+    }
+}
+document.addEventListener('DOMContentLoaded', activarHomeCombos);
+window.addEventListener('resize', activarHomeCombos);
+// Mostrar todos los combos al hacer clic en el menú 'Nuestros Combos' o navegar a #combos
+window.addEventListener('hashchange', function() {
+    if (window.location.hash === '#combos') {
+        mostrarTodosCombos();
+    } else {
+        mostrarCombosHome();
+    }
+});
+// Forzar mostrar todos los combos al hacer clic en el menú 'Nuestros Combos'
+document.addEventListener('DOMContentLoaded', function() {
+    var navCombos = document.querySelector('.nav-link[href="#combos"]');
+    if (navCombos) {
+        navCombos.addEventListener('click', function() {
+            setTimeout(mostrarTodosCombos, 400); // Espera a que el scroll termine
+        });
+    }
+});
