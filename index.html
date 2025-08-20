@@ -20,20 +20,180 @@
     <link rel="icon" type="image/png" href="images/favicon.ico">
 </head>
 <body>
-    <nav class="navbar" style="justify-content: flex-end;">
-        <div class="nav-container" style="width:100%; display:flex; justify-content:flex-end; align-items:center;">
-            <ul class="nav-menu" style="display:flex; gap:1.5rem; list-style:none; margin:0; padding:0;">
-                <li><a href="index.html" class="nav-link active" style="color:var(--secondary-red);font-weight:bold;">Inicio</a></li>
-                <li><a href="combos.html" class="nav-link">Combos</a></li>
-                <li><a href="menu.html" class="nav-link">Menú</a></li>
-                <!-- Enlace a Nosotros eliminado -->
-                <li><a href="contacto.html" class="nav-link">Contacto</a></li>
-            </ul>
+    <!-- Header mejorado -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <a href="index.html" class="logo">
+                    <img src="images/Logo.jpg" alt="Logo Bocaditos Criollos">
+                    <span>Bocaditos Criollos</span>
+                </a>
+                
+                <!-- Menú hamburguesa para móviles -->
+                <button class="hamburger" id="hamburger" aria-label="Menú">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+                
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="#inicio" class="nav-link active">Inicio</a></li>
+                    <li><a href="combos.html" class="nav-link">Combos</a></li>
+                    <li><a href="#menu-bebidas" class="nav-link">Menú</a></li>
+                    <li><a href="#contacto" class="nav-link">Contacto</a></li>
+                    <li><a href="#historia" class="nav-link">Historia</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Sección Hero -->
+    <section id="inicio" class="hero">
+        <div class="hero-overlay"></div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">
+                        Sabores <span class="highlight">Tradicionales</span><br>
+                        de Colombia
+                    </h1>
+                    <p class="hero-subtitle">
+                        Descubre la auténtica tradición culinaria colombiana con nuestros 
+                        bocaditos criollos. Empanadas, fritos y delicias caseras preparadas 
+                        con amor y recetas de familia.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="combos.html" class="btn-primary">
+                            <i class="fas fa-utensils"></i>
+                            Ver Combos
+                        </a>
+                        <a href="https://wa.me/573138513658?text=¡Hola! Me interesa conocer más sobre Bocaditos Criollos 🍴" 
+                           class="btn-secondary" target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                            Pedir Ahora
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="hero-image">
+                    <div class="floating-card">
+                        <img src="images/Combo_Arepas.jpg" alt="Deliciosos bocaditos criollos" id="hero-slider-img">
+                        <div class="card-badge">
+                            <i class="fas fa-fire"></i>
+                            ¡Popular!
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </nav>
+        
+        <!-- Elementos flotantes decorativos -->
+        <div class="floating-elements">
+            <div class="floating-icon" style="top: 20%; left: 10%;">🥟</div>
+            <div class="floating-icon" style="top: 60%; right: 15%;">🔥</div>
+            <div class="floating-icon" style="top: 30%; right: 25%;">⭐</div>
+        </div>
+    </section>
+
+    <!-- Sección Combos Destacados -->
+    <section id="combos-preview" class="combos-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Combos Destacados</h2>
+                <p class="section-subtitle">Los favoritos de nuestros clientes</p>
+            </div>
+            
+            <div class="combos-grid" id="combos-preview-grid">
+                <!-- Combo 1 -->
+                <div class="combo-card">
+                    <div class="card-image">
+                        <img src="images/Pipian.jpg" alt="Combo Empanadas Tradicionales" />
+                        <div class="card-overlay">
+                            <button class="btn-card" onclick="contactarWhatsApp('Combo Empanadas Tradicionales')">
+                                <i class="fab fa-whatsapp"></i> Pedir
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Combo Empanadas Tradicionales</h3>
+                        <p class="card-description">
+                            12 crujientes y deliciosas empanadas vallunas con ají criollo 
+                            y salsa casera tipo chimichurri. La tradición en cada bocado.
+                        </p>
+                        <div class="card-price">$33.000</div>
+                        <div class="card-features">
+                            <span><i class="fas fa-clock"></i> 90 min</span>
+                            <span><i class="fas fa-fire"></i> Tradicional</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Combo 2 -->
+                <div class="combo-card">
+                    <div class="card-image">
+                        <img src="images/Arepas_huevo_Trisafica.jpg" alt="Megacombo" />
+                        <div class="card-overlay">
+                            <button class="btn-card" onclick="contactarWhatsApp('Megacombo')">
+                                <i class="fab fa-whatsapp"></i> Pedir
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Megacombo</h3>
+                        <p class="card-description">
+                            6 empanadas tradicionales y 4 arepas de huevo trifásicas 
+                            con pollo y carne desmechada. Perfecto para compartir.
+                        </p>
+                        <div class="card-price">$35.000</div>
+                        <div class="card-features">
+                            <span><i class="fas fa-users"></i> 4-6 personas</span>
+                            <span><i class="fas fa-heart"></i> Familiar</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Combo 3 -->
+                <div class="combo-card">
+                    <div class="card-image">
+                        <img src="images/Vegetarianas.jpg" alt="Combo Veggie" />
+                        <div class="card-overlay">
+                            <button class="btn-card" onclick="contactarWhatsApp('Combo Veggie')">
+                                <i class="fab fa-whatsapp"></i> Pedir
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Combo Veggie</h3>
+                        <p class="card-description">
+                            8 deliciosos nuggets de lenteja con ajo y especias, 
+                            acompañados con papa salada y salsa chimichurri.
+                        </p>
+                        <div class="card-price">$18.000</div>
+                        <div class="card-features">
+                            <span><i class="fas fa-leaf"></i> Vegetariano</span>
+                            <span><i class="fas fa-heart"></i> Saludable</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section-cta">
+                <a href="combos.html" class="btn-primary btn-large">
+                    Ver Todos los Combos
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
     <!-- Sección Menú Bebidas y Oferta Saludable -->
     <section id="menu-bebidas" class="menu-bebidas-section">
-        <div class="container" style="max-width:1200px;">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Nuestro Menú</h2>
+                <p class="section-subtitle">Bebidas y opciones saludables para complementar</p>
+            </div>
+            
             <div class="menu-bebidas-cards">
                 <!-- Tarjeta Bebidas calientes -->
                 <div class="combo-card menu-bebidas-card">
@@ -47,8 +207,8 @@
                         <button class="carousel-btn next" onclick="moveCarousel(this, 1)">&#10095;</button>
                     </div>
                     <div class="card-content">
-                        <h2 class="card-title">Bebidas calientes ☕</h2>
-                        <ul>
+                        <h2 class="card-title">Bebidas Calientes ☕</h2>
+                        <ul class="menu-list">
                             <li>Espresso <span>$4.300</span></li>
                             <li>Espresso doble <span>$6.300</span></li>
                             <li>Café americano mediano <span>$4.300</span></li>
@@ -56,11 +216,12 @@
                             <li>Café latte mediano <span>$5.300</span></li>
                             <li>Capuchino mediano <span>$5.300</span></li>
                             <li>Macchiato <span>$5.300</span></li>
-                            <li>Armasilla infusionada <span>$4.500</span></li>
+                            <li>Aromática infusionada <span>$4.500</span></li>
                             <li>Milo <span>$5.700</span></li>
                         </ul>
                     </div>
                 </div>
+                
                 <!-- Tarjeta Bebidas frías -->
                 <div class="combo-card menu-bebidas-card fria">
                     <div class="card-carousel">
@@ -73,8 +234,8 @@
                         <button class="carousel-btn next" onclick="moveCarousel(this, 1)">&#10095;</button>
                     </div>
                     <div class="card-content">
-                        <h2 class="card-title">Bebidas frías</h2>
-                        <ul>
+                        <h2 class="card-title">Bebidas Frías 🧊</h2>
+                        <ul class="menu-list">
                             <li>Agua sin gas <span>$4.100</span></li>
                             <li>Agua con gas <span>$4.100</span></li>
                             <li>Gaseosa en lata <span>$5.100</span></li>
@@ -90,6 +251,7 @@
                         </ul>
                     </div>
                 </div>
+                
                 <!-- Tarjeta Oferta saludable -->
                 <div class="combo-card menu-bebidas-card saludable">
                     <div class="card-carousel">
@@ -102,8 +264,8 @@
                         <button class="carousel-btn next" onclick="moveCarousel(this, 1)">&#10095;</button>
                     </div>
                     <div class="card-content">
-                        <h2 class="card-title">Oferta saludable</h2>
-                        <ul>
+                        <h2 class="card-title">Oferta Saludable 🥗</h2>
+                        <ul class="menu-list">
                             <li>Porción de fruta <span>$4.400</span></li>
                             <li>Parfait <span>$7.800</span></li>
                             <li>Yogurt griego integral <span>$4.500</span></li>
@@ -119,75 +281,100 @@
             </div>
         </div>
     </section>
-    <!-- Fin sección menú bebidas -->
-    <style>
-    .card-carousel {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 1rem;
-        position: relative;
-    }
-    .carousel-track {
-        width: 180px;
-        height: 120px;
-        overflow: hidden;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-    }
-    .carousel-img {
-        width: 180px;
-        height: 120px;
-        object-fit: cover;
-        display: none;
-        border-radius: 10px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.12);
-        transition: opacity 0.4s;
-    }
-    .carousel-img.active {
-        display: block;
-        opacity: 1;
-    }
-    .carousel-btn {
-        background: rgba(255,255,255,0.8);
-        border: none;
-        font-size: 1.5rem;
-        cursor: pointer;
-        padding: 0.2rem 0.7rem;
-        border-radius: 50%;
-        margin: 0 0.3rem;
-        z-index: 2;
-        transition: background 0.2s;
-    }
-    .carousel-btn:hover {
-        background: #ffe5e5;
-    }
-    </style>
-    <script>
-    function moveCarousel(btn, dir) {
-        const carousel = btn.closest('.card-carousel');
-        const imgs = carousel.querySelectorAll('.carousel-img');
-        let idx = Array.from(imgs).findIndex(img => img.classList.contains('active'));
-        imgs[idx].classList.remove('active');
-        idx = (idx + dir + imgs.length) % imgs.length;
-        imgs[idx].classList.add('active');
-    }
 
-    // Cambio automático de sliders
-    function autoCarousel() {
-        const carousels = document.querySelectorAll('.card-carousel');
-        carousels.forEach(carousel => {
-            const imgs = carousel.querySelectorAll('.carousel-img');
-            let idx = Array.from(imgs).findIndex(img => img.classList.contains('active'));
-            imgs[idx].classList.remove('active');
-            idx = (idx + 1) % imgs.length;
-            imgs[idx].classList.add('active');
-        });
-    }
-    setInterval(autoCarousel, 3000);
-    </script>
+    <!-- Sección Historia -->
+    <section id="historia" class="history-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Nuestra Historia</h2>
+                <p class="section-subtitle">Tradición familiar que trasciende generaciones</p>
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-image">
+                            <img src="images/historia-1.jpg" alt="Inicios de Bocaditos Criollos" />
+                            <div class="timeline-badge">
+                                <i class="fas fa-seedling"></i>
+                            </div>
+                        </div>
+                        <div class="timeline-text">
+                            <div class="timeline-year">1995</div>
+                            <h3>Los Inicios</h3>
+                            <p>
+                                Todo comenzó en la cocina de la abuela María, quien con sus 
+                                manos expertas y recetas heredadas de generación en generación, 
+                                comenzó a preparar las empanadas más deliciosas del barrio.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content reverse">
+                        <div class="timeline-text">
+                            <div class="timeline-year">2005</div>
+                            <h3>Crecimiento y Tradición</h3>
+                            <p>
+                                Con el pasar de los años, la familia creció y con ella, 
+                                nuestra oferta gastronómica. Incorporamos los fritos tradicionales 
+                                que tanto caracterizaban las tardes bogotanas.
+                            </p>
+                        </div>
+                        <div class="timeline-image">
+                            <img src="images/historia-2.jpg" alt="Expansión del negocio" />
+                            <div class="timeline-badge">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-image">
+                            <img src="images/historia-3.jpg" alt="Local actual" />
+                            <div class="timeline-badge">
+                                <i class="fas fa-home"></i>
+                            </div>
+                        </div>
+                        <div class="timeline-text">
+                            <div class="timeline-year">2015</div>
+                            <h3>Nuestro Hogar</h3>
+                            <p>
+                                Abrimos nuestro local actual en el corazón de Bogotá, 
+                                un espacio cálido y acogedor donde cada cliente se siente 
+                                como en familia.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content reverse">
+                        <div class="timeline-text">
+                            <div class="timeline-year">2024</div>
+                            <h3>Innovación con Tradición</h3>
+                            <p>
+                                Hoy en día, combinamos la tradición familiar con la 
+                                innovación tecnológica, llevando nuestros sabores 
+                                auténticos a más familias bogotanas.
+                            </p>
+                        </div>
+                        <div class="timeline-image">
+                            <img src="images/historia-4.jpg" alt="Actualidad del negocio" />
+                            <div class="timeline-badge">
+                                <i class="fas fa-rocket"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Contacto -->
     <section id="contacto" class="contact-section">
         <div class="container">
             <div class="section-header">
@@ -244,111 +431,16 @@
                 </div>
                 
                 <div class="contact-map">
-                    <div class="map-container" style="text-align:center; margin:2rem 0;">
-                        <iframe src="https://www.google.com/maps?q=Carrera+87+%2368-91,+Bogot%C3%A1,+Colombia&output=embed" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                    </div> <!-- map-container -->
-                </div> <!-- contact-map -->
-            </div> <!-- contact-content -->
-        </div> <!-- container -->
-    </section>
-
-    <!-- Sección Historia -->
-    <section id="historia" class="history-section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Nuestra Historia</h2>
-                <p class="section-subtitle">Tradición familiar que trasciende generaciones</p>
-            </div>
-            
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-image">
-                            <img src="images/historia-1.jpg" alt="Inicios de Bocaditos Criollos" />
-                            <div class="timeline-badge">
-                                <i class="fas fa-seedling"></i>
-                            </div>
-                        </div>
-                        <div class="timeline-text">
-                            <div class="timeline-year">1995</div>
-                            <h3>Los Inicios</h3>
-                            <p>
-                                Todo comenzó en la cocina de la abuela María, quien con sus 
-                                manos expertas y recetas heredadas de generación en generación, 
-                                comenzó a preparar las empanadas más deliciosas del barrio. 
-                                Lo que inició como un pequeño negocio familiar se convirtió 
-                                en una pasión por preservar los sabores tradicionales colombianos.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-content reverse">
-                        <div class="timeline-text">
-                            <div class="timeline-year">2005</div>
-                            <h3>Crecimiento y Tradición</h3>
-                            <p>
-                                Con el pasar de los años, la familia creció y con ella, 
-                                nuestra oferta gastronómica. Incorporamos los fritos tradicionales 
-                                que tanto caracterizaban las tardes bogotanas: buñuelos, 
-                                carimañolas y papas rellenas que conquistaron el corazón 
-                                de nuestros clientes fieles.
-                            </p>
-                        </div>
-                        <div class="timeline-image">
-                            <img src="images/historia-2.jpg" alt="Expansión del negocio" />
-                            <div class="timeline-badge">
-                                <i class="fas fa-chart-line"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-image">
-                            <img src="images/historia-3.jpg" alt="Local actual" />
-                            <div class="timeline-badge">
-                                <i class="fas fa-home"></i>
-                            </div>
-                        </div>
-                        <div class="timeline-text">
-                            <div class="timeline-year">2015</div>
-                            <h3>Nuestro Hogar</h3>
-                            <p>
-                                Abrimos nuestro local actual en el corazón de Bogotá, 
-                                un espacio cálido y acogedor donde cada cliente se siente 
-                                como en familia. Aquí, cada bocadito es preparado con el 
-                                mismo amor y dedicación de siempre, manteniendo viva 
-                                la tradición culinaria colombiana.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-content reverse">
-                        <div class="timeline-text">
-                            <div class="timeline-year">2024</div>
-                            <h3>Innovación con Tradición</h3>
-                            <p>
-                                Hoy en día, combinamos la tradición familiar con la 
-                                innovación tecnológica. Mantenemos nuestras recetas 
-                                ancestrales mientras facilitamos el pedido a través 
-                                de WhatsApp y redes sociales, llevando nuestros sabores 
-                                auténticos a más familias bogotanas.
-                            </p>
-                        </div>
-                        <div class="timeline-image">
-                            <video autoplay muted loop>
-                                <source src="images/bocaditos-proceso.mp4" type="video/mp4">
-                                <img src="images/historia-4.jpg" alt="Actualidad del negocio" />
-                            </video>
-                            <div class="timeline-badge">
-                                <i class="fas fa-rocket"></i>
-                            </div>
-                        </div>
+                    <div class="map-container">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.9658!2d-74.1109734!3d4.6581!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNMKwMzknMzMuMiJOIDc0wrAwNic0Mi42Ilc!5e0!3m2!1sen!2sco!4v1234567890"
+                            width="100%" 
+                            height="450" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
                     </div>
                 </div>
             </div>
@@ -361,7 +453,7 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <div class="footer-logo">
-                        <img src="images/Logo.jpg" alt="Logo Bocaditos Criollos" style="height:6.0rem; width:auto; vertical-align:middle; margin-right:0.5rem;">
+                        <img src="images/Logo.jpg" alt="Logo Bocaditos Criollos">
                         <span>Bocaditos Criollos</span>
                     </div>
                     <p class="footer-description">
@@ -369,7 +461,7 @@
                         con amor y dedicación desde 1995.
                     </p>
                     <div class="footer-social">
-                        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.facebook.com/Bocaditos-Criollos-1487704988144414/" class="social-link"><i class="fab fa-facebook"></i></a>
                         <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
                         <a href="https://wa.me/573138513658" class="social-link"><i class="fab fa-whatsapp"></i></a>
                     </div>
@@ -379,18 +471,19 @@
                     <h4>Enlaces Rápidos</h4>
                     <ul class="footer-links">
                         <li><a href="#inicio">Inicio</a></li>
-                        <!-- Enlace a Nuestros Combos eliminado -->
+                        <li><a href="combos.html">Combos</a></li>
+                        <li><a href="#menu-bebidas">Menú</a></li>
                         <li><a href="#contacto">Contacto</a></li>
-                        <li><a href="#historia">Nuestra Historia</a></li>
+                        <li><a href="#historia">Historia</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-section">
                     <h4>Contacto</h4>
                     <div class="footer-contact">
-                        <p><i class="fas fa-map-marker-alt"></i> Carrera 87 65 91, Bogotá</p>
-                        <p><i class="fas fa-phone"></i> +57 313 8361131</p>
-                        <p><i class="fab fa-whatsapp"></i> +57 313 8361131</p>
+                        <p><i class="fas fa-map-marker-alt"></i> Carrera 87 #68-91, Bogotá</p>
+                        <p><i class="fas fa-phone"></i> +57 313 851 3658</p>
+                        <p><i class="fab fa-whatsapp"></i> +57 313 851 3658</p>
                     </div>
                 </div>
                 
@@ -416,14 +509,36 @@
     <!-- Botón WhatsApp flotante -->
     <a href="https://wa.me/573138513658?text=¡Hola! Me interesa conocer más sobre Bocaditos Criollos 🍴" 
        class="whatsapp-float" target="_blank" aria-label="Contactar por WhatsApp">
-    <span style="margin-right:0.5rem;font-weight:500;font-size:0.95rem;white-space:nowrap;">Cotiza Aquí</span>
-    <i class="fab fa-whatsapp"></i>
+        <span class="whatsapp-text">Cotiza Aquí</span>
+        <i class="fab fa-whatsapp"></i>
     </a>
 
     <!-- JavaScript -->
     <script src="js/main.js"></script>
     <script src="js/hero-slider.js"></script>
+    <script>
+        // Funcionalidad del carrusel de menú bebidas
+        function moveCarousel(btn, dir) {
+            const carousel = btn.closest('.card-carousel');
+            const imgs = carousel.querySelectorAll('.carousel-img');
+            let idx = Array.from(imgs).findIndex(img => img.classList.contains('active'));
+            imgs[idx].classList.remove('active');
+            idx = (idx + dir + imgs.length) % imgs.length;
+            imgs[idx].classList.add('active');
+        }
 
-
+        // Cambio automático de sliders
+        function autoCarousel() {
+            const carousels = document.querySelectorAll('.card-carousel');
+            carousels.forEach(carousel => {
+                const imgs = carousel.querySelectorAll('.carousel-img');
+                let idx = Array.from(imgs).findIndex(img => img.classList.contains('active'));
+                imgs[idx].classList.remove('active');
+                idx = (idx + 1) % imgs.length;
+                imgs[idx].classList.add('active');
+            });
+        }
+        setInterval(autoCarousel, 4000);
+    </script>
 </body>
 </html>

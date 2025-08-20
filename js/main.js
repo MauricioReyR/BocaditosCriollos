@@ -1,45 +1,165 @@
-// ===== VARIABLES GLOBALES =====
-const navbar = document.getElementById('navbar');
-const hamburger = document.getElementById('hamburger');
-const navMenu = document.getElementById('nav-menu');
-const navLinks = document.querySelectorAll('.nav-link');
+// ===== CONFIGURACIÓN Y VARIABLES GLOBALES =====
+const CONFIG = {
+    telefono: '573138513658',
+    animationDuration: 300,
+    scrollOffset: 80,
+    carouselInterval: 4000,
+    lazyLoadRootMargin: '50px'
+};
 
-// ===== NAVEGACIÓN SUAVE =====
+// Variables del DOM
+let navbar, hamburger, navMenu, navLinks;
+
+// ===== INICIALIZACIÓN PRINCIPAL =====
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('🍴 Bocaditos Criollos - Iniciando aplicación...');
+    
+    initializeElements();
+    initializeFeatures();
+    showWelcomeMessage();
+});
+
+// ===== INICIALIZACIÓN DE ELEMENTOS DOM =====
+function initializeElements() {
+    navbar = document.querySelector('.navbar');
+    hamburger = document.getElementById('hamburger');
+    navMenu = document.getElementById('nav-menu');
+    navLinks = document.querySelectorAll('.nav-link');
+}
+
+// ===== INICIALIZACIÓN DE FUNCIONALIDADES =====
+function initializeFeatures() {
+    initSmoothScroll();
+    initMobileMenu();
+    initScrollEffects();
+    initScrollAnimations();
+    initLazyLoading();
+    initCardEffects();
+    initErrorHandling();
+    initAccessibilityFeatures();
+    
+    // Funcionalidades condicionales
+    if (window.innerWidth > 768) {
+        initParallaxEffects();
+    }
+    
+    // Eventos optimizados
+    window.addEventListener('scroll', throttle(handleScroll, 16));
+    window.addEventListener('resize', debounce(handleResize, 250));
+}
+
+// ===== NAVEGACIÓN SUAVE MEJORADA =====
 function initSmoothScroll() {
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
-            e.preventDefault();
+            const href = this.getAttribute('href');
             
-            const targetId = this.getAttribute('href');
-            const targetSection = document.querySelector(targetId);
+            // Si es enlace a otra página, permitir navegación normal
+            if (href.includes('.html')) {
+                return;
+            }
             
-            if (targetSection) {
-                const offsetTop = targetSection.offsetTop - 80;
+            // Si es ancla en la misma página
+            if (href.startsWith('#')) {
+                e.preventDefault();
+                const targetId = href.substring(1);
+                const targetSection = document.getElementById(targetId);
                 
-                window.scrollTo({
-                    top: offsetTop,
-                    behavior: 'smooth'
-                });
-                
-                // Cerrar menú móvil si está abierto
-                navMenu.classList.remove('active');
-                hamburger.classList.remove('active');
-                
-                // Actualizar enlace activo
-                updateActiveLink(this);
+                if (targetSection) {
+                    smoothScrollTo(targetSection, CONFIG.scrollOffset);
+                    closeMobileMenu();
+                    updateActiveLink(this);
+                }
             }
         });
     });
 }
 
-// ===== ACTUALIZAR ENLACE ACTIVO =====
+// ===== SCROLL SUAVE OPTIMIZADO =====
+function smoothScrollTo(element, offset = 0) {
+    const elementPosition = element.getBoundingClientRect().top;
+    const offsetPosition = elementPosition + window.pageYOffset - offset;
+    
+    window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+    });
+}
+
+// ===== MENÚ MÓVIL MEJORADO =====
+function initMobileMenu() {
+    if (hamburger && navMenu) {
+        hamburger.addEventListener('click', toggleMobileMenu);
+        
+        // Cerrar menú al hacer clic fuera
+        document.addEventListener('click', function(e) {
+            if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                closeMobileMenu();
+            }
+        });
+        
+        // Cerrar menú con tecla ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeMobileMenu();
+            }
+        });
+    }
+}
+
+function toggleMobileMenu() {
+    hamburger.classList.toggle('active');
+    navMenu.classList.toggle('active');
+    document.body.classList.toggle('menu-open');
+}
+
+function closeMobileMenu() {
+    hamburger?.classList.remove('active');
+    navMenu?.classList.remove('active');
+    document.body.classList.remove('menu-open');
+}
+
+// ===== EFECTOS DE SCROLL =====
+function initScrollEffects() {
+    if (!navbar) return;
+    
+    // Efecto navbar al hacer scroll
+    window.addEventListener('scroll', throttle(() => {
+        if (window.scrollY > 100) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    }, 10));
+}
+
+function handleScroll() {
+    updateActiveNavOnScroll();
+    revealElementsOnScroll();
+}
+
+// ===== ACTUALIZACIÓN DE ENLACE ACTIVO =====
 function updateActiveLink(activeLink) {
     navLinks.forEach(link => link.classList.remove('active'));
     activeLink.classList.add('active');
 }
 
-// ===== NAVBAR AL HACER SCROLL =====
-// showDailyPromo eliminado
+function updateActiveNavOnScroll() {
+    const sections = document.querySelectorAll('section[id]');
+    const scrollPos = window.scrollY + CONFIG.scrollOffset + 50;
+    
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+        const sectionId = section.getAttribute('id');
+        const correspondingLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
+        
+        if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+            navLinks.forEach(link => link.classList.remove('active'));
+            correspondingLink?.classList.add('active');
+        }
+    });
+}
 
 // ===== ANIMACIONES AL HACER SCROLL =====
 function initScrollAnimations() {
@@ -51,112 +171,71 @@ function initScrollAnimations() {
     const observer = new IntersectionObserver(function(entries) {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
+                entry.target.classList.add('fade-in');
+                observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
     
     // Elementos a animar
-    const animatedElements = document.querySelectorAll(
-        '.combo-card, .info-card, .timeline-item, .footer-section'
-    );
+    const animatedElements = document.querySelectorAll(`
+        .combo-card, .info-card, .timeline-item, .footer-section,
+        .menu-bebidas-card, .hero-text, .hero-image
+    `);
     
     animatedElements.forEach(element => {
-        element.style.opacity = '0';
-        element.style.transform = 'translateY(30px)';
-        element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         observer.observe(element);
     });
 }
 
-// ===== CONTACTAR WHATSAPP =====
-function contactarWhatsApp(producto = '') {
-    const telefono = '573138513658';
-    let mensaje = '¡Hola! Me interesa conocer más sobre Bocaditos Criollos 🍴';
+function revealElementsOnScroll() {
+    const elements = document.querySelectorAll('.fade-in:not(.visible)');
     
-    if (producto) {
-        mensaje = `¡Hola! Me interesa el ${producto} de Bocaditos Criollos 🍴`;
-    }
-    
-    const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
-    window.open(url, '_blank');
+    elements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        const elementVisible = 150;
+        
+        if (elementTop < window.innerHeight - elementVisible) {
+            element.classList.add('visible');
+        }
+    });
 }
 
-// ===== LAZY LOADING PARA IMÁGENES =====
+// ===== LAZY LOADING MEJORADO =====
 function initLazyLoading() {
     const images = document.querySelectorAll('img[data-src]');
     
-    const imageObserver = new IntersectionObserver(function(entries, observer) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                img.src = img.dataset.src;
-                img.classList.remove('lazy');
-                imageObserver.unobserve(img);
-            }
+    if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.dataset.src;
+                    img.classList.remove('lazy');
+                    img.classList.add('lazy-loaded');
+                    imageObserver.unobserve(img);
+                }
+            });
+        }, {
+            rootMargin: CONFIG.lazyLoadRootMargin
         });
-    });
-    
-    images.forEach(img => imageObserver.observe(img));
+        
+        images.forEach(img => imageObserver.observe(img));
+    } else {
+        // Fallback para navegadores sin IntersectionObserver
+        images.forEach(img => {
+            img.src = img.dataset.src;
+            img.classList.remove('lazy');
+        });
+    }
 }
 
-// ===== CONTADOR DE VISITAS (LOCAL) =====
-function initVisitCounter() {
-    let visits = localStorage.getItem('bocaditos-visits') || 0;
-    visits = parseInt(visits) + 1;
-    localStorage.setItem('bocaditos-visits', visits);
-    
-    console.log(`¡Bienvenido a Bocaditos Criollos! Visita número: ${visits}`);
-}
-
-// ===== LOADING SPINNER =====
-function showLoadingSpinner() {
-    const spinner = document.createElement('div');
-    spinner.id = 'loading-spinner';
-    spinner.innerHTML = `
-        <div style="
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 248, 220, 0.9);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-        ">
-            <div style="
-                width: 50px;
-                height: 50px;
-                border: 5px solid #D4AF37;
-                border-top: 5px solid transparent;
-                border-radius: 50%;
-                animation: spin 1s linear infinite;
-            "></div>
-        </div>
-        <style>
-            @keyframes spin {
-                0% { transform: rotate(0deg); }
-                100% { transform: rotate(360deg); }
-            }
-        </style>
-    `;
-    
-    document.body.appendChild(spinner);
-    
-    // Remover spinner después de 2 segundos
-    setTimeout(() => {
-        spinner.remove();
-    }, 2000);
-}
-
-// ===== EFECTOS DE HOVER EN TARJETAS =====
-function initCardHoverEffects() {
-    const cards = document.querySelectorAll('.combo-card, .info-card');
+// ===== EFECTOS DE TARJETAS =====
+function initCardEffects() {
+    const cards = document.querySelectorAll('.combo-card, .info-card, .menu-bebidas-card');
     
     cards.forEach(card => {
+        // Efecto hover mejorado
         card.addEventListener('mouseenter', function() {
             this.style.transform = 'translateY(-10px) scale(1.02)';
         });
@@ -164,10 +243,554 @@ function initCardHoverEffects() {
         card.addEventListener('mouseleave', function() {
             this.style.transform = 'translateY(0) scale(1)';
         });
+        
+        // Efecto de clic con ripple
+        card.addEventListener('click', function(e) {
+            createRippleEffect(e, this);
+        });
     });
 }
 
-// ===== VALIDACIÓN DE FORMULARIOS =====
+function createRippleEffect(event, element) {
+    const ripple = document.createElement('span');
+    const rect = element.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height);
+    const x = event.clientX - rect.left - size / 2;
+    const y = event.clientY - rect.top - size / 2;
+    
+    ripple.style.cssText = `
+        position: absolute;
+        width: ${size}px;
+        height: ${size}px;
+        left: ${x}px;
+        top: ${y}px;
+        background: rgba(212, 175, 55, 0.3);
+        border-radius: 50%;
+        transform: scale(0);
+        animation: ripple 0.6s ease-out;
+        pointer-events: none;
+        z-index: 1;
+    `;
+    
+    element.style.position = 'relative';
+    element.style.overflow = 'hidden';
+    element.appendChild(ripple);
+    
+    setTimeout(() => ripple.remove(), 600);
+}
+
+// CSS para animación ripple
+const rippleCSS = `
+@keyframes ripple {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+`;
+
+const style = document.createElement('style');
+style.textContent = rippleCSS;
+document.head.appendChild(style);
+
+// ===== CONTACTAR WHATSAPP MEJORADO =====
+function contactarWhatsApp(producto = '', precio = '') {
+    let mensaje = '¡Hola! Me interesa conocer más sobre Bocaditos Criollos 🍴';
+    
+    if (producto) {
+        mensaje = `¡Hola! Me interesa el *${producto}*`;
+        if (precio) {
+            mensaje += ` por ${precio}`;
+        }
+        mensaje += ' de Bocaditos Criollos 🍴';
+    }
+    
+    const url = `https://wa.me/${CONFIG.telefono}?text=${encodeURIComponent(mensaje)}`;
+    
+    // Analytics tracking
+    trackEvent('whatsapp_contact', {
+        producto: producto || 'general',
+        precio: precio || 'no_price'
+    });
+    
+    window.open(url, '_blank');
+}
+
+// ===== EFECTOS PARALLAX =====
+function initParallaxEffects() {
+    const parallaxElements = document.querySelectorAll('[data-parallax]');
+    
+    if (parallaxElements.length === 0) return;
+    
+    window.addEventListener('scroll', throttle(() => {
+        const scrollTop = window.pageYOffset;
+        
+        parallaxElements.forEach(element => {
+            const speed = parseFloat(element.dataset.parallax) || 0.5;
+            const yPos = -(scrollTop * speed);
+            element.style.transform = `translate3d(0, ${yPos}px, 0)`;
+        });
+    }, 16));
+}
+
+// ===== SISTEMA DE NOTIFICACIONES =====
+class NotificationSystem {
+    constructor() {
+        this.container = this.createContainer();
+    }
+    
+    createContainer() {
+        const container = document.createElement('div');
+        container.id = 'notification-container';
+        container.style.cssText = `
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        `;
+        document.body.appendChild(container);
+        return container;
+    }
+    
+    show(message, type = 'success', duration = 4000) {
+        const notification = document.createElement('div');
+        const colors = {
+            success: '#22c55e',
+            error: '#ef4444',
+            warning: '#f59e0b',
+            info: '#3b82f6'
+        };
+        
+        notification.style.cssText = `
+            background: ${colors[type] || colors.success};
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 500;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            opacity: 0;
+            transform: translateX(100%);
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            max-width: 350px;
+            word-wrap: break-word;
+        `;
+        
+        notification.textContent = message;
+        this.container.appendChild(notification);
+        
+        // Animación de entrada
+        requestAnimationFrame(() => {
+            notification.style.opacity = '1';
+            notification.style.transform = 'translateX(0)';
+        });
+        
+        // Auto remover
+        setTimeout(() => {
+            notification.style.opacity = '0';
+            notification.style.transform = 'translateX(100%)';
+            setTimeout(() => notification.remove(), 300);
+        }, duration);
+        
+        return notification;
+    }
+}
+
+const notifications = new NotificationSystem();
+
+// ===== MANEJO DE ERRORES GLOBAL =====
+function initErrorHandling() {
+    window.addEventListener('error', function(e) {
+        console.error('Error capturado:', e.error);
+        notifications.show('Ha ocurrido un error. Por favor, recarga la página.', 'error');
+    });
+    
+    window.addEventListener('unhandledrejection', function(e) {
+        console.error('Promise rechazada:', e.reason);
+        notifications.show('Error de conexión. Verifica tu internet.', 'warning');
+        e.preventDefault();
+    });
+}
+
+// ===== CARACTERÍSTICAS DE ACCESIBILIDAD =====
+function initAccessibilityFeatures() {
+    // Navegación con teclado
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Tab') {
+            document.body.classList.add('keyboard-navigation');
+        }
+    });
+    
+    document.addEventListener('mousedown', function() {
+        document.body.classList.remove('keyboard-navigation');
+    });
+    
+    // Anuncios para lectores de pantalla
+    const srAnnouncer = document.createElement('div');
+    srAnnouncer.setAttribute('aria-live', 'polite');
+    srAnnouncer.setAttribute('aria-atomic', 'true');
+    srAnnouncer.className = 'sr-only';
+    document.body.appendChild(srAnnouncer);
+    
+    window.announceToScreenReader = function(message) {
+        srAnnouncer.textContent = message;
+        setTimeout(() => srAnnouncer.textContent = '', 1000);
+    };
+}
+
+// ===== UTILIDADES DE RENDIMIENTO =====
+function throttle(func, limit) {
+    let inThrottle;
+    return function() {
+        const args = arguments;
+        const context = this;
+        if (!inThrottle) {
+            func.apply(context, args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, limit);
+        }
+    };
+}
+
+function debounce(func, wait, immediate) {
+    let timeout;
+    return function() {
+        const context = this, args = arguments;
+        const later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        const callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+
+// ===== SISTEMA DE ANALYTICS BÁSICO =====
+function trackEvent(eventName, eventData = {}) {
+    // Integración con Google Analytics si está disponible
+    if (typeof gtag !== 'undefined') {
+        gtag('event', eventName, {
+            ...eventData,
+            timestamp: new Date().toISOString(),
+            page_location: window.location.href
+        });
+    }
+    
+    // Log para desarrollo
+    console.log(`📊 Evento: ${eventName}`, eventData);
+}
+
+// ===== GESTIÓN DE COOKIES Y PREFERENCIAS =====
+const CookieManager = {
+    set: function(name, value, days = 30) {
+        const expires = new Date();
+        expires.setTime(expires.getTime() + (days * 24 * 60 * 60 * 1000));
+        document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/;SameSite=Lax`;
+    },
+    
+    get: function(name) {
+        const nameEQ = name + "=";
+        const ca = document.cookie.split(';');
+        for (let i = 0; i < ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+            if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+        }
+        return null;
+    },
+    
+    delete: function(name) {
+        this.set(name, '', -1);
+    }
+};
+
+// ===== DETECTOR DE DISPOSITIVO =====
+const DeviceDetector = {
+    isMobile: () => /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),
+    isTablet: () => /(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(navigator.userAgent),
+    isDesktop: () => !DeviceDetector.isMobile() && !DeviceDetector.isTablet(),
+    
+    getViewportSize: () => ({
+        width: window.innerWidth || document.documentElement.clientWidth,
+        height: window.innerHeight || document.documentElement.clientHeight
+    })
+};
+
+// ===== MANEJADOR DE REDIMENSIONAMIENTO =====
+function handleResize() {
+    const viewport = DeviceDetector.getViewportSize();
+    
+    // Ajustar comportamiento según tamaño de pantalla
+    if (viewport.width <= 768) {
+        closeMobileMenu();
+    }
+    
+    // Reajustar elementos que dependen del tamaño
+    updateResponsiveElements();
+    
+    // Notificar cambio de orientación en móviles
+    if (DeviceDetector.isMobile()) {
+        announceToScreenReader('Orientación de pantalla cambiada');
+    }
+}
+
+function updateResponsiveElements() {
+    const cards = document.querySelectorAll('.combo-card');
+    const viewport = DeviceDetector.getViewportSize();
+    
+    // Ajustar grid de tarjetas según el tamaño de pantalla
+    if (viewport.width <= 480) {
+        cards.forEach(card => {
+            card.style.margin = '0 auto';
+            card.style.maxWidth = '100%';
+        });
+    }
+}
+
+// ===== SISTEMA DE COMPARTIR EN REDES SOCIALES =====
+function shareOnSocial(platform, text = '', url = '') {
+    const currentUrl = url || window.location.href;
+    const shareText = text || 'Descubre los mejores bocaditos criollos en Bogotá 🍴';
+    
+    const shareUrls = {
+        facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`,
+        twitter: `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(currentUrl)}`,
+        whatsapp: `https://wa.me/?text=${encodeURIComponent(shareText + ' ' + currentUrl)}`,
+        telegram: `https://t.me/share/url?url=${encodeURIComponent(currentUrl)}&text=${encodeURIComponent(shareText)}`,
+        linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(currentUrl)}`
+    };
+    
+    if (shareUrls[platform]) {
+        const shareWindow = window.open(
+            shareUrls[platform], 
+            '_blank', 
+            'width=600,height=400,scrollbars=yes,resizable=yes'
+        );
+        
+        trackEvent('social_share', { platform, url: currentUrl });
+        
+        // Verificar si la ventana se cerró (compartido exitoso)
+        if (shareWindow) {
+            const checkClosed = setInterval(() => {
+                if (shareWindow.closed) {
+                    clearInterval(checkClosed);
+                    notifications.show(`Compartido en ${platform}!`, 'success');
+                }
+            }, 1000);
+        }
+    } else {
+        notifications.show('Plataforma no soportada', 'error');
+    }
+}
+
+// ===== SISTEMA DE BÚSQUEDA EN COMBOS =====
+function initSearchSystem() {
+    const searchInput = document.createElement('input');
+    searchInput.type = 'text';
+    searchInput.placeholder = 'Buscar combos...';
+    searchInput.className = 'combo-search';
+    searchInput.style.cssText = `
+        width: 100%;
+        max-width: 400px;
+        padding: 0.8rem 1.2rem;
+        border: 2px solid var(--primary-gold);
+        border-radius: 25px;
+        font-size: 1rem;
+        margin: 1rem auto;
+        display: block;
+        background: white;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    `;
+    
+    const combosSection = document.querySelector('.combos-section .container');
+    if (combosSection && document.querySelectorAll('.combo-card').length > 6) {
+        combosSection.insertBefore(searchInput, combosSection.querySelector('.combos-grid'));
+        
+        searchInput.addEventListener('input', debounce(function(e) {
+            filterCombosBySearch(e.target.value);
+        }, 300));
+    }
+}
+
+function filterCombosBySearch(searchTerm) {
+    const cards = document.querySelectorAll('.combo-card');
+    const term = searchTerm.toLowerCase().trim();
+    let visibleCount = 0;
+    
+    cards.forEach(card => {
+        const title = card.querySelector('.card-title').textContent.toLowerCase();
+        const description = card.querySelector('.card-description').textContent.toLowerCase();
+        const isVisible = title.includes(term) || description.includes(term);
+        
+        card.style.display = isVisible ? 'block' : 'none';
+        if (isVisible) visibleCount++;
+    });
+    
+    // Mostrar mensaje si no hay resultados
+    updateSearchResults(visibleCount, term);
+}
+
+function updateSearchResults(count, term) {
+    let messageElement = document.querySelector('.search-results-message');
+    
+    if (count === 0 && term) {
+        if (!messageElement) {
+            messageElement = document.createElement('div');
+            messageElement.className = 'search-results-message';
+            messageElement.style.cssText = `
+                text-align: center;
+                padding: 2rem;
+                color: var(--text-light);
+                font-size: 1.1rem;
+            `;
+            document.querySelector('.combos-grid').after(messageElement);
+        }
+        messageElement.innerHTML = `
+            <i class="fas fa-search" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.3;"></i>
+            <p>No se encontraron combos para "${term}"</p>
+            <p style="font-size: 0.9rem; margin-top: 0.5rem;">Intenta con otros términos de búsqueda</p>
+        `;
+        messageElement.style.display = 'block';
+    } else {
+        if (messageElement) {
+            messageElement.style.display = 'none';
+        }
+    }
+}
+
+// ===== SISTEMA DE FAVORITOS LOCAL =====
+const FavoritesManager = {
+    key: 'bocaditos-favoritos',
+    
+    getFavorites: function() {
+        try {
+            return JSON.parse(localStorage.getItem(this.key)) || [];
+        } catch (e) {
+            return [];
+        }
+    },
+    
+    addFavorite: function(comboId, comboData) {
+        const favorites = this.getFavorites();
+        if (!favorites.find(fav => fav.id === comboId)) {
+            favorites.push({
+                id: comboId,
+                ...comboData,
+                dateAdded: new Date().toISOString()
+            });
+            localStorage.setItem(this.key, JSON.stringify(favorites));
+            notifications.show('Combo añadido a favoritos!', 'success');
+            this.updateFavoriteButtons();
+        }
+    },
+    
+    removeFavorite: function(comboId) {
+        let favorites = this.getFavorites();
+        favorites = favorites.filter(fav => fav.id !== comboId);
+        localStorage.setItem(this.key, JSON.stringify(favorites));
+        notifications.show('Combo removido de favoritos', 'info');
+        this.updateFavoriteButtons();
+    },
+    
+    isFavorite: function(comboId) {
+        return this.getFavorites().some(fav => fav.id === comboId);
+    },
+    
+    updateFavoriteButtons: function() {
+        const cards = document.querySelectorAll('.combo-card');
+        cards.forEach((card, index) => {
+            const comboId = `combo-${index}`;
+            const isFav = this.isFavorite(comboId);
+            let favBtn = card.querySelector('.favorite-btn');
+            
+            if (!favBtn) {
+                favBtn = document.createElement('button');
+                favBtn.className = 'favorite-btn';
+                favBtn.innerHTML = '<i class="fas fa-heart"></i>';
+                favBtn.style.cssText = `
+                    position: absolute;
+                    top: 1rem;
+                    left: 1rem;
+                    background: rgba(255, 255, 255, 0.9);
+                    border: none;
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    z-index: 10;
+                `;
+                card.querySelector('.card-image').appendChild(favBtn);
+                
+                favBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const title = card.querySelector('.card-title').textContent;
+                    const price = card.querySelector('.card-price').textContent;
+                    
+                    if (this.isFavorite(comboId)) {
+                        this.removeFavorite(comboId);
+                    } else {
+                        this.addFavorite(comboId, { title, price });
+                    }
+                });
+            }
+            
+            favBtn.style.color = isFav ? '#ef4444' : '#6b7280';
+            favBtn.style.transform = isFav ? 'scale(1.1)' : 'scale(1)';
+        });
+    }
+};
+
+// ===== MODO OFFLINE =====
+function initOfflineMode() {
+    window.addEventListener('online', function() {
+        notifications.show('Conexión restablecida', 'success');
+        document.body.classList.remove('offline');
+        syncOfflineActions();
+    });
+    
+    window.addEventListener('offline', function() {
+        notifications.show('Sin conexión a internet. Funcionando en modo offline', 'warning', 6000);
+        document.body.classList.add('offline');
+    });
+    
+    // Service Worker para cache offline (si está disponible)
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+            navigator.serviceWorker.register('/sw.js')
+                .then(function(registration) {
+                    console.log('SW registrado con éxito:', registration.scope);
+                })
+                .catch(function(registrationError) {
+                    console.log('Error al registrar SW:', registrationError);
+                });
+        });
+    }
+}
+
+function syncOfflineActions() {
+    const offlineActions = JSON.parse(localStorage.getItem('offline-actions') || '[]');
+    
+    if (offlineActions.length > 0) {
+        console.log('Sincronizando acciones offline:', offlineActions);
+        
+        // Procesar acciones pendientes
+        offlineActions.forEach(action => {
+            if (action.type === 'whatsapp_contact') {
+                // Reabrir WhatsApp si es necesario
+                trackEvent('whatsapp_contact_synced', action.data);
+            }
+        });
+        
+        localStorage.removeItem('offline-actions');
+    }
+}
+
+// ===== VALIDACIONES DE FORMULARIO =====
 function validateForm(formData) {
     const errors = [];
     
@@ -186,472 +809,230 @@ function validateForm(formData) {
     return errors;
 }
 
-// ===== NOTIFICACIONES TOAST =====
-function showToast(message, type = 'success') {
-    const toast = document.createElement('div');
-    toast.className = `toast toast-${type}`;
-    toast.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: ${type === 'success' ? '#4CAF50' : '#F44336'};
-        color: white;
-        padding: 15px 20px;
-        border-radius: 8px;
-        z-index: 10000;
-        font-weight: 500;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        opacity: 0;
-        transform: translateX(100%);
-        transition: all 0.3s ease;
-    `;
-    toast.textContent = message;
+// ===== SISTEMA DE CALIFICACIONES =====
+const RatingSystem = {
+    rate: function(comboId, rating) {
+        const ratings = JSON.parse(localStorage.getItem('combo-ratings') || '{}');
+        ratings[comboId] = {
+            rating: rating,
+            date: new Date().toISOString()
+        };
+        localStorage.setItem('combo-ratings', JSON.stringify(ratings));
+        notifications.show(`¡Gracias por tu calificación de ${rating} estrellas!`, 'success');
+        trackEvent('combo_rating', { comboId, rating });
+    },
     
-    document.body.appendChild(toast);
+    getRating: function(comboId) {
+        const ratings = JSON.parse(localStorage.getItem('combo-ratings') || '{}');
+        return ratings[comboId]?.rating || 0;
+    },
     
-    // Animación de entrada
+    addRatingStars: function() {
+        const cards = document.querySelectorAll('.combo-card');
+        cards.forEach((card, index) => {
+            const comboId = `combo-${index}`;
+            const currentRating = this.getRating(comboId);
+            
+            const starsContainer = document.createElement('div');
+            starsContainer.className = 'rating-stars';
+            starsContainer.style.cssText = `
+                display: flex;
+                gap: 2px;
+                margin-top: 0.5rem;
+                justify-content: center;
+            `;
+            
+            for (let i = 1; i <= 5; i++) {
+                const star = document.createElement('span');
+                star.innerHTML = '★';
+                star.style.cssText = `
+                    cursor: pointer;
+                    font-size: 1.2rem;
+                    color: ${i <= currentRating ? '#fbbf24' : '#d1d5db'};
+                    transition: color 0.2s ease;
+                `;
+                
+                star.addEventListener('click', () => this.rate(comboId, i));
+                star.addEventListener('mouseenter', () => this.highlightStars(starsContainer, i));
+                star.addEventListener('mouseleave', () => this.highlightStars(starsContainer, currentRating));
+                
+                starsContainer.appendChild(star);
+            }
+            
+            card.querySelector('.card-content').appendChild(starsContainer);
+        });
+    },
+    
+    highlightStars: function(container, rating) {
+        const stars = container.querySelectorAll('span');
+        stars.forEach((star, index) => {
+            star.style.color = index < rating ? '#fbbf24' : '#d1d5db';
+        });
+    }
+};
+
+// ===== CALCULADORA DE PEDIDOS =====
+const OrderCalculator = {
+    items: [],
+    
+    addItem: function(name, price) {
+        const existingItem = this.items.find(item => item.name === name);
+        if (existingItem) {
+            existingItem.quantity += 1;
+        } else {
+            this.items.push({
+                name: name,
+                price: parseFloat(price.replace(/[^\d]/g, '')),
+                quantity: 1
+            });
+        }
+        this.updateDisplay();
+        notifications.show(`${name} añadido al carrito`, 'success');
+    },
+    
+    removeItem: function(name) {
+        this.items = this.items.filter(item => item.name !== name);
+        this.updateDisplay();
+    },
+    
+    getTotal: function() {
+        return this.items.reduce((total, item) => total + (item.price * item.quantity), 0);
+    },
+    
+    updateDisplay: function() {
+        let cartButton = document.querySelector('.cart-button');
+        if (!cartButton) {
+            cartButton = this.createCartButton();
+        }
+        
+        const itemCount = this.items.reduce((count, item) => count + item.quantity, 0);
+        cartButton.innerHTML = `
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-count">${itemCount}</span>
+        `;
+        
+        cartButton.style.display = itemCount > 0 ? 'flex' : 'none';
+    },
+    
+    createCartButton: function() {
+        const button = document.createElement('button');
+        button.className = 'cart-button';
+        button.style.cssText = `
+            position: fixed;
+            bottom: 90px;
+            right: 30px;
+            background: var(--primary-gold);
+            color: white;
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: var(--shadow-heavy);
+            z-index: 999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        `;
+        
+        button.addEventListener('click', () => this.showCart());
+        document.body.appendChild(button);
+        return button;
+    },
+    
+    showCart: function() {
+        if (this.items.length === 0) {
+            notifications.show('El carrito está vacío', 'info');
+            return;
+        }
+        
+        const cartSummary = this.items.map(item => 
+            `${item.quantity}x ${item.name} - ${item.price * item.quantity}`
+        ).join('\n');
+        
+        const total = this.getTotal();
+        const message = `Mi pedido:\n${cartSummary}\n\nTotal: ${total}`;
+        
+        contactarWhatsApp('Pedido personalizado', `${total}`, message);
+    }
+};
+
+// ===== FUNCIONES EXPORTADAS GLOBALMENTE =====
+window.contactarWhatsApp = contactarWhatsApp;
+window.shareOnSocial = shareOnSocial;
+window.notifications = notifications;
+window.FavoritesManager = FavoritesManager;
+window.OrderCalculator = OrderCalculator;
+window.RatingSystem = RatingSystem;
+
+// ===== INICIALIZACIÓN ADICIONAL PARA PÁGINAS ESPECÍFICAS =====
+function initPageSpecificFeatures() {
+    // Para página de combos
+    if (document.querySelector('.combos-section')) {
+        initSearchSystem();
+        FavoritesManager.updateFavoriteButtons();
+        RatingSystem.addRatingStars();
+    }
+    
+    // Para página principal
+    if (document.querySelector('.hero')) {
+        initHeroEffects();
+    }
+}
+
+function initHeroEffects() {
+    const heroImage = document.querySelector('#hero-slider-img');
+    if (heroImage) {
+        // El slider ya está manejado por hero-slider.js
+        return;
+    }
+}
+
+// ===== MENSAJE DE BIENVENIDA =====
+function showWelcomeMessage() {
     setTimeout(() => {
-        toast.style.opacity = '1';
-        toast.style.transform = 'translateX(0)';
+        console.log(`
+🍴 ¡Bienvenido a Bocaditos Criollos! 
+✨ Sitio web desarrollado con las mejores prácticas
+🚀 Versión optimizada con mejoras en:
+   • Navegación mejorada
+   • Diseño responsivo
+   • Rendimiento optimizado
+   • Accesibilidad mejorada
+   • Experiencia de usuario premium
+        `);
+        
+        trackEvent('page_loaded', {
+            page_title: document.title,
+            page_location: window.location.href,
+            user_agent: navigator.userAgent,
+            viewport: DeviceDetector.getViewportSize()
+        });
+    }, 1000);
+}
+
+// ===== INICIALIZACIÓN FINAL =====
+document.addEventListener('DOMContentLoaded', function() {
+    // Inicializar características adicionales después de la carga principal
+    setTimeout(() => {
+        initOfflineMode();
+        initPageSpecificFeatures();
     }, 100);
     
-    // Remover después de 3 segundos
-    setTimeout(() => {
-        toast.style.opacity = '0';
-        toast.style.transform = 'translateX(100%)';
-        setTimeout(() => toast.remove(), 300);
-    }, 3000);
-}
-
-// ===== PRELOADER =====
-function initPreloader() {
-    window.addEventListener('load', function() {
-        const preloader = document.getElementById('loading-spinner');
-        if (preloader) {
-            preloader.style.opacity = '0';
-            setTimeout(() => preloader.remove(), 300);
-        }
-    });
-}
-
-// ===== ANIMACIÓN DE NÚMEROS CONTADOR =====
-function animateCounters() {
-    const counters = document.querySelectorAll('[data-count]');
-    
-    counters.forEach(counter => {
-        const target = parseInt(counter.getAttribute('data-count'));
-        const duration = 2000; // 2 segundos
-        const increment = target / (duration / 16); // 60 FPS
-        let current = 0;
-        
-        const timer = setInterval(() => {
-            current += increment;
-            if (current >= target) {
-                current = target;
-                clearInterval(timer);
-            }
-            counter.textContent = Math.floor(current);
-        }, 16);
-    });
-}
-
-// ===== PARALLAX SUAVE =====
-function initParallax() {
-    const parallaxElements = document.querySelectorAll('.parallax');
-    
-    window.addEventListener('scroll', () => {
-        const scrollTop = window.pageYOffset;
-        
-        parallaxElements.forEach(element => {
-            const speed = element.dataset.speed || 0.5;
-            const yPos = -(scrollTop * speed);
-            element.style.transform = `translate3d(0, ${yPos}px, 0)`;
-        });
-    });
-}
-
-// ===== DETECCIÓN DE DISPOSITIVO MÓVIL =====
-function isMobile() {
-    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-}
-
-// ===== OPTIMIZACIÓN DE RENDIMIENTO =====
-function throttle(func, delay) {
-    let timeoutId;
-    let lastExecTime = 0;
-    return function (...args) {
-        const currentTime = Date.now();
-        
-        if (currentTime - lastExecTime > delay) {
-            func.apply(this, args);
-            lastExecTime = currentTime;
-        } else {
-            clearTimeout(timeoutId);
-            timeoutId = setTimeout(() => {
-                func.apply(this, args);
-                lastExecTime = Date.now();
-            }, delay - (currentTime - lastExecTime));
-        }
-    };
-}
-
-// ===== MANEJO DE ERRORES GLOBAL =====
-function initErrorHandling() {
-    window.addEventListener('error', function(e) {
-        console.error('Error capturado:', e.error);
-        // En producción, aquí enviarías el error a un servicio de logging
-    });
-    
-    window.addEventListener('unhandledrejection', function(e) {
-        console.error('Promise rechazada:', e.reason);
-        e.preventDefault();
-    });
-}
-
-// ===== MODO OFFLINE =====
-function initOfflineMode() {
-    window.addEventListener('online', function() {
-        showToast('Conexión restablecida', 'success');
-        document.body.classList.remove('offline');
-    });
-    
-    window.addEventListener('offline', function() {
-        showToast('Sin conexión a internet', 'warning');
-        document.body.classList.add('offline');
-    });
-}
-
-// ===== COMPARTIR EN REDES SOCIALES =====
-function shareOnSocial(platform, text = '', url = '') {
-    const currentUrl = url || window.location.href;
-    const shareText = text || 'Descubre los mejores bocaditos criollos en Bogotá 🍴';
-    
-    const shareUrls = {
-        facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`,
-        twitter: `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(currentUrl)}`,
-        whatsapp: `https://wa.me/?text=${encodeURIComponent(shareText + ' ' + currentUrl)}`,
-        telegram: `https://t.me/share/url?url=${encodeURIComponent(currentUrl)}&text=${encodeURIComponent(shareText)}`
-    };
-    
-    if (shareUrls[platform]) {
-        window.open(shareUrls[platform], '_blank', 'width=600,height=400');
-    }
-}
-
-// ===== ANÁLITICAS BÁSICAS =====
-function trackEvent(eventName, eventData = {}) {
-    // Aquí puedes integrar con Google Analytics, Facebook Pixel, etc.
-    console.log(`Evento: ${eventName}`, eventData);
-    
-    // Ejemplo de integración con Google Analytics
-    if (typeof gtag !== 'undefined') {
-        gtag('event', eventName, eventData);
-    }
-}
-
-// ===== COOKIES Y PREFERENCIAS =====
-function setCookie(name, value, days = 30) {
-    const expires = new Date();
-    expires.setTime(expires.getTime() + (days * 24 * 60 * 60 * 1000));
-    document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/`;
-}
-
-function getCookie(name) {
-    const nameEQ = name + "=";
-    const ca = document.cookie.split(';');
-    for (let i = 0; i < ca.length; i++) {
-        let c = ca[i];
-        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
-        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
-    }
-    return null;
-}
-
-// ===== INICIALIZAR TODO AL CARGAR LA PÁGINA =====
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('🍴 Bocaditos Criollos - Sitio Web Cargado');
-    
-    // Mostrar spinner de carga
-    showLoadingSpinner();
-    
-    // Inicializar funcionalidades
-    initSmoothScroll();
-    handleNavbarScroll();
-    initMobileMenu();
-    initScrollAnimations();
-    initLazyLoading();
-    initCardHoverEffects();
-    initErrorHandling();
-    initOfflineMode();
-    
-    // Funcionalidades opcionales
-    if (window.innerWidth > 768) {
-        initParallax();
-    }
-    
-    // Contador de visitas
-    initVisitCounter();
-    
-    // Optimizar eventos de scroll
-    const throttledScroll = throttle(updateActiveNavOnScroll, 100);
-    window.addEventListener('scroll', throttledScroll);
-    
-    // Tracking inicial
-    trackEvent('page_view', {
-        page_title: document.title,
-        page_location: window.location.href
-    });
-    
-    // Mensaje de bienvenida después de la carga
-    setTimeout(() => {
-        console.log('✨ ¡Bienvenido a Bocaditos Criollos! - Sitio desarrollado con amor para preservar la tradición culinaria colombiana');
-    }, 2500);
+    // Precargar recursos críticos
+    preloadCriticalResources();
 });
 
-// ===== FUNCIONES ESPECÍFICAS DEL NEGOCIO =====
-
-// Función para mostrar información nutricional
-function showNutritionalInfo(producto) {
-    const nutritionalData = {
-        'Combo Empanadas Tradicionales': {
-            calorias: 650,
-            proteinas: '25g',
-            carbohidratos: '45g',
-            grasas: '35g'
-        },
-        'Combo Fritos Mixtos': {
-            calorias: 820,
-            proteinas: '18g',
-            carbohidratos: '65g',
-            grasas: '45g'
-        }
-        // Agregar más productos aquí
-    };
+function preloadCriticalResources() {
+    const criticalImages = [
+        'images/Logo.jpg',
+        'images/Combo_Arepas.jpg',
+        'images/Pipian.jpg'
+    ];
     
-    const info = nutritionalData[producto];
-    if (info) {
-        alert(`Información Nutricional - ${producto}:\nCalorías: ${info.calorias}\nProteínas: ${info.proteinas}\nCarbohidratos: ${info.carbohidratos}\nGrasas: ${info.grasas}`);
-    }
+    criticalImages.forEach(src => {
+        const img = new Image();
+        img.src = src;
+    });
 }
-
-// Función para calcular tiempo de entrega estimado
-function calculateDeliveryTime(ubicacion = 'centro') {
-    const deliveryTimes = {
-        'centro': '20-30 minutos',
-        'norte': '30-45 minutos',
-        'sur': '25-35 minutos',
-        'oriente': '35-45 minutos',
-        'occidente': '30-40 minutos'
-    };
-    
-    return deliveryTimes[ubicacion] || '30-45 minutos';
-}
-
-// Función para mostrar promociones del día
-function showDailyPromo() {
-    const today = new Date().getDay();
-    const promos = {
-        0: '🎉 Domingo Familiar: 20% de descuento en combos familiares',
-        1: '🌟 Lunes de Empanadas: 2x1 en empanadas tradicionales',
-        2: '🔥 Martes de Fritos: Combo fritos mixtos con bebida gratis',
-        3: '💫 Miércoles Ejecutivo: Descuento especial en combos ejecutivos',
-        4: '🎊 Jueves Tradicional: Ingrediente extra gratis en cualquier combo',
-        5: '🎈 Viernes de Antojo: Postre incluido en todos los combos',
-        6: '🎁 Sábado Especial: Descuento por compras superiores a $40.000'
-    };
-    
-    const promoText = promos[today] || '🍴 ¡Siempre tenemos algo especial para ti!';
-    
-    // Crear notificación de promoción
-    const promoDiv = document.createElement('div');
-    promoDiv.style.cssText = `
-        position: fixed;
-        top: 100px;
-        right: 20px;
-        background: linear-gradient(135deg, #D4AF37 0%, #FFD700 100%);
-        color: white;
-        padding: 15px 20px;
-        border-radius: 10px;
-        max-width: 300px;
-        z-index: 1001;
-        font-weight: 500;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        animation: slideInRight 0.5s ease;
-    `;
-    
-    promoDiv.innerHTML = `
-        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-            <div>${promoText}</div>
-            <button onclick="this.parentElement.parentElement.remove()" 
-                    style="background: none; border: none; color: white; font-size: 18px; cursor: pointer; margin-left: 10px;">×</button>
-        </div>
-    `;
-    
-    document.body.appendChild(promoDiv);
-    
-    // Auto remover después de 8 segundos
-    setTimeout(() => {
-        if (promoDiv.parentNode) {
-            promoDiv.remove();
-        }
-    }, 8000);
-}
-
-// ===== FUNCIONES AUXILIARES =====
-
-// Formatear números de teléfono
-function formatPhoneNumber(phone) {
-    const cleaned = phone.replace(/\D/g, '');
-    const match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
-    if (match) {
-        return `(${match[1]}) ${match[2]}-${match[3]}`;
-    }
-    return phone;
-}
-
-// Validar email
-function isValidEmail(email) {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(email);
-}
-
-// Generar ID único
-function generateUniqueId() {
-    return Date.now().toString(36) + Math.random().toString(36).substr(2);
-}
-
-// ===== EXPORTAR FUNCIONES GLOBALES =====
-window.contactarWhatsApp = contactarWhatsApp;
-window.showNutritionalInfo = showNutritionalInfo;
-window.shareOnSocial = shareOnSocial;
-window.calculateDeliveryTime = calculateDeliveryTime;
-
-// ===== INICIALIZAR PROMOCIÓN DEL DÍA =====
-// showDailyPromo eliminado
-
-// ===== ESTILOS CSS ADICIONALES INYECTADOS =====
-const additionalStyles = `
-    <style>
-        @keyframes slideInRight {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-        
-        .offline {
-            filter: grayscale(0.3);
-        }
-        
-        .offline::before {
-            content: "Sin conexión";
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: #ff4444;
-            color: white;
-            text-align: center;
-            padding: 10px;
-            z-index: 10001;
-            font-weight: bold;
-        }
-        
-        .lazy {
-            filter: blur(5px);
-            transition: filter 0.3s;
-        }
-        
-        .lazy-loaded {
-            filter: blur(0);
-        }
-        
-        .toast {
-            font-family: 'Open Sans', sans-serif;
-        }
-        
-        /* Mejoras de accesibilidad */
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
-        
-        /* Focus visible para navegación con teclado */
-        .nav-link:focus-visible,
-        .btn-primary:focus-visible,
-        .btn-secondary:focus-visible {
-            outline: 3px solid #D4AF37;
-            outline-offset: 2px;
-        }
-        
-        /* Alto contraste para mejor legibilidad */
-        @media (prefers-contrast: high) {
-            :root {
-                --text-dark: #000000;
-                --text-light: #333333;
-            }
-        }
-    </style>
-`;
-
-document.head.insertAdjacentHTML('beforeend', additionalStyles);
-
-// ===== CONTROL DE TARJETAS DE COMBOS (HOME Y SECCIÓN) =====
-function getMaxCombosToShow() {
-    if (window.innerWidth < 768) return 1; // móviles
-    if (window.innerWidth < 1200) return 2; // tablets
-    return 3; // escritorio
-}
-function mostrarCombosHome() {
-    var combosGrid = document.querySelector('.combos-grid');
-    if (combosGrid) {
-        var cards = combosGrid.querySelectorAll('.combo-card');
-        var activeCards = combosGrid.querySelectorAll('.combo-card.active');
-        var max = getMaxCombosToShow();
-        // Ocultar todas por defecto
-        for (let i = 0; i < cards.length; i++) {
-            cards[i].style.display = 'none';
-        }
-        // Mostrar solo las activas, hasta el máximo permitido
-        for (let i = 0; i < activeCards.length && i < max; i++) {
-            activeCards[i].style.display = '';
-        }
-    }
-}
-function mostrarTodosCombos() {
-    var combosGrid = document.querySelector('.combos-grid');
-    if (combosGrid) {
-        var cards = combosGrid.querySelectorAll('.combo-card');
-        for (let i = 0; i < cards.length; i++) {
-            cards[i].style.display = '';
-        }
-    }
-}
-// Mostrar solo combos activos en el home al cargar y al redimensionar
-function activarHomeCombos() {
-    mostrarCombosHome();
-    // Si el hash es #combos, mostrar todos
-    if (window.location.hash === '#combos') {
-        mostrarTodosCombos();
-    }
-}
-document.addEventListener('DOMContentLoaded', activarHomeCombos);
-window.addEventListener('resize', activarHomeCombos);
-// Mostrar todos los combos al hacer clic en el menú 'Nuestros Combos' o navegar a #combos
-window.addEventListener('hashchange', function() {
-    if (window.location.hash === '#combos') {
-        mostrarTodosCombos();
-    } else {
-        mostrarCombosHome();
-    }
-});
-// Forzar mostrar todos los combos al hacer clic en el menú 'Nuestros Combos'
-document.addEventListener('DOMContentLoaded', function() {
-    var navCombos = document.querySelector('.nav-link[href="#combos"]');
-    if (navCombos) {
-        navCombos.addEventListener('click', function() {
-            setTimeout(mostrarTodosCombos, 400); // Espera a que el scroll termine
-        });
-    }
-});
