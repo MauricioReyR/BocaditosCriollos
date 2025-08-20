@@ -1,3 +1,67 @@
+/* ===== MENÚ BEBIDAS Y OFERTA SALUDABLE ===== */
+.menu-bebidas-section {
+    background: #fff;
+    padding: 3rem 0 2rem 0;
+    color: #111;
+}
+.menu-bebidas-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+}
+.menu-bebidas-card {
+    flex: 1 1 300px;
+    min-width: 260px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(212,175,55,0.13);
+    border: 2px solid #D4AF37;
+    background: linear-gradient(135deg,#fffbe6 60%,#ffe082 100%);
+}
+.menu-bebidas-card.fria {
+    border-color: #43b649;
+    background: linear-gradient(135deg,#e3f6fd 60%,#b3e5fc 100%);
+}
+.menu-bebidas-card.saludable {
+    border-color: #FFA500;
+    background: linear-gradient(135deg,#fffde7 60%,#ffe0b2 100%);
+}
+.menu-bebidas-card .card-content {
+    padding: 2rem 1.5rem 1.5rem 1.5rem;
+}
+.menu-bebidas-card .card-title {
+    font-family: var(--font-primary);
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 8px #fffbe6;
+    color: #D73502;
+}
+.menu-bebidas-card.fria .card-title {
+    color: #43b649;
+    text-shadow: 0 2px 8px #e3f6fd;
+}
+.menu-bebidas-card.saludable .card-title {
+    color: #FFA500;
+    text-shadow: 0 2px 8px #fffde7;
+}
+.menu-bebidas-card ul {
+    list-style: none;
+    padding: 0;
+    color: #111;
+    font-size: 1.08rem;
+}
+.menu-bebidas-card li span {
+    color: #D73502;
+    font-weight: bold;
+}
+@media (max-width: 900px) {
+    .menu-bebidas-cards {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+}
 .btn-primary {
     background: var(--gradient-gold);
     color: var(--white);

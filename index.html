@@ -20,439 +20,174 @@
     <link rel="icon" type="image/png" href="images/favicon.ico">
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <a href="#inicio" class="logo">
-                <img src="images/Logo.jpg" alt="Logo Bocaditos Criollos" style="height:6.0rem; width:auto; vertical-align:middle; margin-right:0.5rem;">
-                Bocaditos Criollos
-            </a>
-            
-            <ul class="nav-menu" id="nav-menu">
-                <li><a href="#inicio" class="nav-link">Inicio</a></li>
-                <li><a href="#combos" class="nav-link">Nuestros Combos</a></li>
-                <li><a href="#contacto" class="nav-link">Contacto</a></li>
-                <li><a href="#historia" class="nav-link">Nuestra Historia</a></li>
+    <nav class="navbar" style="justify-content: flex-end;">
+        <div class="nav-container" style="width:100%; display:flex; justify-content:flex-end; align-items:center;">
+            <ul class="nav-menu" style="display:flex; gap:1.5rem; list-style:none; margin:0; padding:0;">
+                <li><a href="index.html" class="nav-link active" style="color:var(--secondary-red);font-weight:bold;">Inicio</a></li>
+                <li><a href="combos.html" class="nav-link">Combos</a></li>
+                <li><a href="menu.html" class="nav-link">Menú</a></li>
+                <!-- Enlace a Nosotros eliminado -->
+                <li><a href="contacto.html" class="nav-link">Contacto</a></li>
             </ul>
-            
-            <div class="hamburger" id="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
         </div>
     </nav>
-
-    <!-- Sección Inicio -->
-    <section id="inicio" class="hero">
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <div class="hero-text">
-                <h1 class="hero-title">
-                    <span class="highlight">Auténticos</span> Sabores<br>
-                    <span class="highlight">Tradicionales</span> Colombianos
-                </h1>
-                <p class="hero-subtitle">
-                    Descubre nuestros deliciosos <strong>fritos tradicionales</strong>, 
-                    <strong>empanadas caseras</strong> y la mejor comida <strong>criolla</strong> 
-                    de Bogotá. Sabores que evocan tradición familiar.
-                </p>
-                
-                <div class="hero-buttons">
-                    <a href="https://wa.me/573138513658?text=¡Hola! Me interesa conocer más sobre sus deliciosos bocaditos criollos 🍴" 
-                       class="btn-primary" target="_blank">
-                        <i class="fab fa-whatsapp"></i>
-                        Pedir por WhatsApp
-                    </a>
-                    <a href="#combos" class="btn-primary">
-                        <i class="fas fa-utensils"></i>
-                        Ver Nuestros Combos
-                    </a>
+    <!-- Sección Menú Bebidas y Oferta Saludable -->
+    <section id="menu-bebidas" class="menu-bebidas-section">
+        <div class="container" style="max-width:1200px;">
+            <div class="menu-bebidas-cards">
+                <!-- Tarjeta Bebidas calientes -->
+                <div class="combo-card menu-bebidas-card">
+                    <div class="card-carousel">
+                        <button class="carousel-btn prev" onclick="moveCarousel(this, -1)">&#10094;</button>
+                        <div class="carousel-track">
+                            <img src="images/Combo_Arepas.jpg" alt="Bebida caliente 1" class="carousel-img active">
+                            <img src="images/Logo.jpg" alt="Bebida caliente 2" class="carousel-img">
+                            <img src="images/Arepas_huevo_Trisafica.jpg" alt="Bebida caliente 3" class="carousel-img">
+                        </div>
+                        <button class="carousel-btn next" onclick="moveCarousel(this, 1)">&#10095;</button>
+                    </div>
+                    <div class="card-content">
+                        <h2 class="card-title">Bebidas calientes ☕</h2>
+                        <ul>
+                            <li>Espresso <span>$4.300</span></li>
+                            <li>Espresso doble <span>$6.300</span></li>
+                            <li>Café americano mediano <span>$4.300</span></li>
+                            <li>Café de la montaña grande <span>$4.700</span></li>
+                            <li>Café latte mediano <span>$5.300</span></li>
+                            <li>Capuchino mediano <span>$5.300</span></li>
+                            <li>Macchiato <span>$5.300</span></li>
+                            <li>Armasilla infusionada <span>$4.500</span></li>
+                            <li>Milo <span>$5.700</span></li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-            
-            <div class="hero-image">
-                <div class="floating-card">
-                    <img src="images/empanadas-hero.jpg" alt="Empanadas tradicionales colombianas" />
-                    <!-- card-badge eliminado -->
+                <!-- Tarjeta Bebidas frías -->
+                <div class="combo-card menu-bebidas-card fria">
+                    <div class="card-carousel">
+                        <button class="carousel-btn prev" onclick="moveCarousel(this, -1)">&#10094;</button>
+                        <div class="carousel-track">
+                            <img src="images/Combo_valluno.jpg" alt="Bebida fría 1" class="carousel-img active">
+                            <img src="images/Pipian.jpg" alt="Bebida fría 2" class="carousel-img">
+                            <img src="images/Vegetarianas.jpg" alt="Bebida fría 3" class="carousel-img">
+                        </div>
+                        <button class="carousel-btn next" onclick="moveCarousel(this, 1)">&#10095;</button>
+                    </div>
+                    <div class="card-content">
+                        <h2 class="card-title">Bebidas frías</h2>
+                        <ul>
+                            <li>Agua sin gas <span>$4.100</span></li>
+                            <li>Agua con gas <span>$4.100</span></li>
+                            <li>Gaseosa en lata <span>$5.100</span></li>
+                            <li>Bebida hidratante <span>$6.100</span></li>
+                            <li>Jugo en caja <span>$4.000</span></li>
+                            <li>Jugo de néctar <span>$4.000</span></li>
+                            <li>Yogurt <span>$3.100</span></li>
+                            <li>Yogurt griego <span>$4.500</span></li>
+                            <li>Leche saborizada <span>$4.300</span></li>
+                            <li>Gelatina <span>$3.100</span></li>
+                            <li>Té frío <span>$4.500</span></li>
+                            <li>Malta en botella <span>$4.500</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Tarjeta Oferta saludable -->
+                <div class="combo-card menu-bebidas-card saludable">
+                    <div class="card-carousel">
+                        <button class="carousel-btn prev" onclick="moveCarousel(this, -1)">&#10094;</button>
+                        <div class="carousel-track">
+                            <img src="images/Vegetarianas.jpg" alt="Saludable 1" class="carousel-img active">
+                            <img src="images/Combo_Arepas.jpg" alt="Saludable 2" class="carousel-img">
+                            <img src="images/Combo_valluno.jpg" alt="Saludable 3" class="carousel-img">
+                        </div>
+                        <button class="carousel-btn next" onclick="moveCarousel(this, 1)">&#10095;</button>
+                    </div>
+                    <div class="card-content">
+                        <h2 class="card-title">Oferta saludable</h2>
+                        <ul>
+                            <li>Porción de fruta <span>$4.400</span></li>
+                            <li>Parfait <span>$7.800</span></li>
+                            <li>Yogurt griego integral <span>$4.500</span></li>
+                            <li>Ensalada saludable <span>$14.600</span></li>
+                            <li>Kumís <span>$5.300</span></li>
+                            <li>Yogurt bajo en grasa <span>$4.300</span></li>
+                            <li>Tabla de quesos <span>$21.000</span></li>
+                            <li>Porción de queso campesino <span>$4.900</span></li>
+                            <li>Wraps <span>$8.600</span></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
-        
-    <!-- Elementos decorativos -->
-        <div class="floating-elements">
-            <div class="floating-icon" style="top: 20%; left: 10%;">
-                <i class="fas fa-pepper-hot"></i>
-            </div>
-            <div class="floating-icon" style="top: 60%; right: 15%;">
-                <i class="fas fa-leaf"></i>
-            </div>
-            <div class="floating-icon" style="bottom: 20%; left: 20%;">
-                <i class="fas fa-heart"></i>
-            </div>
-        </div>
     </section>
+    <!-- Fin sección menú bebidas -->
+    <style>
+    .card-carousel {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1rem;
+        position: relative;
+    }
+    .carousel-track {
+        width: 180px;
+        height: 120px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+    .carousel-img {
+        width: 180px;
+        height: 120px;
+        object-fit: cover;
+        display: none;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+        transition: opacity 0.4s;
+    }
+    .carousel-img.active {
+        display: block;
+        opacity: 1;
+    }
+    .carousel-btn {
+        background: rgba(255,255,255,0.8);
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        padding: 0.2rem 0.7rem;
+        border-radius: 50%;
+        margin: 0 0.3rem;
+        z-index: 2;
+        transition: background 0.2s;
+    }
+    .carousel-btn:hover {
+        background: #ffe5e5;
+    }
+    </style>
+    <script>
+    function moveCarousel(btn, dir) {
+        const carousel = btn.closest('.card-carousel');
+        const imgs = carousel.querySelectorAll('.carousel-img');
+        let idx = Array.from(imgs).findIndex(img => img.classList.contains('active'));
+        imgs[idx].classList.remove('active');
+        idx = (idx + dir + imgs.length) % imgs.length;
+        imgs[idx].classList.add('active');
+    }
 
-    <!-- Sección Combos -->
-    <section id="combos" class="combos-section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Nuestros Combos</h2>
-                <p class="section-subtitle">Combinaciones perfectas de sabores tradicionales</p>
-            </div>
-            
-            <div class="combos-grid" id="combos-grid">
-                <!-- Combo 1 -->
-                <div class="combo-card active">
-                    <div class="card-image">
-                        <img src="images/Pipian.jpg" alt="Combo Empanadas Tradicionales" />
-                        <div class="card-overlay">
-                            <button class="btn-card" onclick="contactarWhatsApp('Combo Empanadas Tradicionales')">
-                                <i class="fab fa-whatsapp"></i> Pedir
-                            </button>
-                        </div>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">Combo Empanadas Tradicionales.</h3>
-                        <p class="card-description">
-                            Combo tradicional: 12 crujientes y deliciosas empanadas vallunas 🤤 con aji criollo🥵 y salsa casera tipo chimichurri😏. Disfruta esta delicia en casa🏡, calientitas y crujientes 🛵 pide tu domicilio ahora 😎
-                        </p>
-                        <div class="card-price">$33.000</div>
-                        <div class="card-features">
-                            <span><i class="fas fa-clock"></i> 90 min</span>
-                            <span><i class="fas fa-fire"></i> Tradición </span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Combo 2 -->
-                <div class="combo-card active">
-                    <div class="card-image">
-                        <img src="images/Vegetarianas.jpg" alt="Combo Veggie" />
-                        <div class="card-overlay">
-                            <button class="btn-card" onclick="contactarWhatsApp('Combo Veggie')">
-                                <i class="fab fa-whatsapp"></i> Pedir
-                            </button>
-                        </div>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">Combo Veggie.</h3>
-                        <p class="card-description">
-                            Disfruta de 8 deliciosos nuggets de lenteja con 🧄ajo y especias🤤. Calientitos y listos para disfrutar acompañados con papa salada y nuestra salsa casera tipo chimichurri 🍽. Haz tu pedido. No quedes sin probarlos 😏
-                        </p>
-                        <div class="card-price">$18.000</div>
-                        <div class="card-features">
-                            <span><i class="fas fa-clock"></i> 90 min</span>
-                            <span><i class="fas fa-award"></i> Vegetariano </span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Combo 3 -->
-                <div class="combo-card active">
-                    <div class="card-image">
-                        <img src="images/Arepas_huevo_Trisafica.jpg" alt="MEGACOMBO" />
-                        <div class="card-overlay">
-                            <button class="btn-card" onclick="contactarWhatsApp('Combo Familiar Criollo')">
-                                <i class="fab fa-whatsapp"></i> Pedir
-                            </button>
-                        </div>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">Megacombo</h3>
-                        <p class="card-description">
-                            ⚠ 6 crujientes y deliciosas😋 empanadas tradicionales y 4 arepas de huevo 🍳 trifasicas con pollo 🍗 desmechado y carne 🥩 desmechada. Se preparan  y salen calientitos para despacho 🏍. Los entregamos con aji criollo 🥵 y salsa casera tipo chimichurri.
-                        </p>
-                        <div class="card-price">$35.000</div>
-                        <div class="card-features">
-                            <span><i class="fas fa-users"></i> 4-6 personas</span>
-                            <span><i class="fas fa-heart"></i> Familiar</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Combo 4 -->
-                <div class="combo-card">
-                    <div class="card-image">
-                        <img src="images/Vegetarianas.jpg" alt="Combo Pastelitos de Yuca" />
-                        <div class="card-overlay">
-                            <button class="btn-card" onclick="contactarWhatsApp('Combo Pastelitos de Yuca')">
-                                <i class="fab fa-whatsapp"></i> Pedir
-                            </button>
-                        </div>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">Combo Pastelitos de Yuca</h3>
-                        <p class="card-description">
-                            📢 Recibe en la comodidad de tu casa 🏡 20 deliciosos y calientitos mini pastelitos de yuca acompañados de ají criollo y salsa casera tipo chimichurri. 
-                        </p>
-                        <div class="card-price">$15.000</div>
-                        <div class="card-features">
-                            <span><i class="fas fa-bolt"></i> Express</span>
-                            <span><i class="fas fa-briefcase"></i> Ejecutivo</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Combo 5 -->
-                <div class="combo-card">
-                    <div class="card-image">
-                        <img src="images/Pipian.jpg" alt="Combo Cerpincho" />
-                        <div class="card-overlay">
-                            <button class="btn-card" onclick="contactarWhatsApp('Combo Cerpincho')">
-                                <i class="fab fa-whatsapp"></i> Pedir
-                            </button>
-                        </div>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">Combo Cerpincho</h3>
-                        <p class="card-description">
-                            🐷  3 deliciosos pinchos 🍢con chicharroncito carnudito  con papa salada, 
-                            jugosa carne de cerdo y plátano maduro delicioso 💯. Acompañados de ají criollo y nuestra infaltable salsa casera tipo chimichurri. 
-                        </p>
-                        <div class="card-price">$15.000</div>
-                        <div class="card-features">
-                            <span><i class="fas fa-bolt"></i> Express</span>
-                            <span><i class="fas fa-briefcase"></i> Ejecutivo</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Combo 6 -->
-                <div class="combo-card">
-                    <div class="card-image">
-                        <img src="images/Pipian.jpg" alt="Combo " />
-                        <div class="card-overlay">
-                            <button class="btn-card" onclick="contactarWhatsApp('Combo Pipian')">
-                                <i class="fab fa-whatsapp"></i> Pedir
-                            </button>
-                        </div>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">Combo Pipian</h3>
-                        <p class="card-description">
-                            Deliciosas receta vegetariana ancestral colombiana🇨🇴. Crujientes empanaditas de maiz rellenas de pipian (papa criolla con 🥜 mani troceado).Animate y pide 10 empanaditas de mani🛵.
-                        </p>
-                        <div class="card-price">$15.000</div>
-                        <div class="card-features">
-                            <span><i class="fas fa-bolt"></i> Express</span>
-                            <span><i class="fas fa-briefcase"></i> Ejecutivo</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Combo 7 -->
-                <div class="combo-card">
-                    <div class="card-image">
-                        <img src="images/Vegetarianas.jpg" alt="Combo Vegetariano" />
-                        <div class="card-overlay">
-                            <button class="btn-card" onclick="contactarWhatsApp('Combo Vegetariano')">
-                                <i class="fab fa-whatsapp"></i> Pedir
-                            </button>
-                        </div>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">Combo Vegetariano</h3>
-                        <p class="card-description">
-                            Deliciosas receta vegetariana ancestral colombiana🇨🇴. Crujientes empanaditas de maiz rellenas de pipian (papa criolla con 🥜 mani troceado).Animate y pide 10 empanaditas de mani🛵.
-                        </p>
-                        <div class="card-price">$15.000</div>
-                        <div class="card-features">
-                            <span><i class="fas fa-bolt"></i> Express</span>
-                            <span><i class="fas fa-briefcase"></i> Ejecutivo</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Combo 8 -->
-                <div class="combo-card">
-                    <div class="card-image">
-                        <img src="images/Arepas_huevo_Trisafica.jpg" alt="Combo Arepas de Huevo" />
-                        <div class="card-overlay">
-                            <button class="btn-card" onclick="contactarWhatsApp('Combo Arepas de Huevo')">
-                                <i class="fab fa-whatsapp"></i> Pedir
-                            </button>
-                        </div>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">Combo Arepas de Huevo</h3>
-                        <p class="card-description">
-                            Disfruta de crujientes arepas de huevo 🍳trifasicas con 🍗pollo desmechado y 🥩 carne molida. Las llevamos calientitas a domicilio 🛵.Las entregamos con aji criollo 🥵 y salsa casera tipo chimichurri 😏. Que esperas? Pide ahora🪀!!!.
-                        </p>
-                        <div class="card-price">$15.000</div>
-                        <div class="card-features">
-                            <span><i class="fas fa-bolt"></i> Express</span>
-                            <span><i class="fas fa-briefcase"></i> Ejecutivo</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Combo 9 -->
-                <div class="combo-card">
-                    <div class="card-image">
-                        <img src="images/Combo_valluno.jpg" alt="Combo Aborrajado" />
-                        <div class="card-overlay">
-                            <button class="btn-card" onclick="contactarWhatsApp('Combo Aborrajado')">
-                                <i class="fab fa-whatsapp"></i> Pedir
-                            </button>
-                        </div>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">Combo Aborrajado</h3>
-                        <p class="card-description">
-                            Disfruta esta delicia del valle: platanito maduro aborrajado,  relleno de queso doble crema. El sabor del valle en un Bocado!
-                        </p>
-                        <div class="card-price">$15.000</div>
-                        <div class="card-features">
-                            <span><i class="fas fa-bolt"></i> Express</span>
-                            <span><i class="fas fa-briefcase"></i> Ejecutivo</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Combo 10 -->
-                <div class="combo-card">
-                    <div class="card-image">
-                        <img src="images/Pipian.jpg" alt="Combo Tolimense" />
-                        <div class="card-overlay">
-                            <button class="btn-card" onclick="contactarWhatsApp('Combo Tolimense')">
-                                <i class="fab fa-whatsapp"></i> Pedir
-                            </button>
-                        </div>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">Combo Tolimense</h3>
-                        <p class="card-description">
-                            En nuestra ruta gastronómica,hacemos una parada en el Tolima grande y les traemos nuestra tradición de 12 Crujientes empanadas de maíz,
-                            rellenas de puré de papa con riogo y trozos de pollo
-                        </p>
-                        <div class="card-price">$15.000</div>
-                        <div class="card-features">
-                            <span><i class="fas fa-bolt"></i> Express</span>
-                            <span><i class="fas fa-briefcase"></i> Ejecutivo</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Combo 11 -->
-                <div class="combo-card">
-                    <div class="card-image">
-                        <img src="images/Pipian.jpg" alt="Combo Marranitas" />
-                        <div class="card-overlay">
-                            <button class="btn-card" onclick="contactarWhatsApp('Combo Marranitas')">
-                                <i class="fab fa-whatsapp"></i> Pedir
-                            </button>
-                        </div>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">Combo Marranitas</h3>
-                        <p class="card-description">
-                            Disfruta de esta delicia valluna ‼COMBO MARRANITAS‼ 
-                            💯Deliciosas bolitas de plátano verde rellenas del crujiente chicharrón🤤. Y siempre es mejor acompañadas de aji criollo y nuestra exquisita salsa casera tipo chimichurri.
-                        </p>
-                        <div class="card-price">$15.000</div>
-                        <div class="card-features">
-                            <span><i class="fas fa-bolt"></i> Express</span>
-                            <span><i class="fas fa-briefcase"></i> Ejecutivo</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Combo 12 -->
-                <div class="combo-card">
-                    <div class="card-image">
-                        <img src="images/Pipian.jpg" alt="Combo MegaBocado" />
-                        <div class="card-overlay">
-                            <button class="btn-card" onclick="contactarWhatsApp('Combo MegaBocado')">
-                                <i class="fab fa-whatsapp"></i> Pedir
-                            </button>
-                        </div>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">Combo MegaBocado</h3>
-                        <p class="card-description">
-                            ‼Todo lo que te gusta de Bocaditos Criollos en un solo combo ✅ lleva 5 empanadas tradicionales 😋 2 arepas de huevo🍳 trifasicas con pollo 🍗 y carne molida y 2 empanadas vegetarianas con espinaca 🥬, maiz dulce 🌽 y queso 🧀. Todo esto llega a la puerta de tu casa 🏡 con aji criollo 🥵 y salsa casera tipo chimichurri 😏. Haz tu pedido 🪀!!
-                        </p>
-                        <div class="card-price">$15.000</div>
-                        <div class="card-features">
-                            <span><i class="fas fa-bolt"></i> Express</span>
-                            <span><i class="fas fa-briefcase"></i> Ejecutivo</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Combo 13 -->
-                <div class="combo-card">
-                    <div class="card-image">
-                        <img src="images/Pipian.jpg" alt="Combo Agrandado" />
-                        <div class="card-overlay">
-                            <button class="btn-card" onclick="contactarWhatsApp('Combo Agrandado')">
-                                <i class="fab fa-whatsapp"></i> Pedir
-                            </button>
-                        </div>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">Combo Agrandado</h3>
-                        <p class="card-description">
-                            Que buena promo! 30 empanadas rellenas de papa y carne desmachada en tamaño bocado y 20 miniarepas de huevo trifasica con huevito de codorniz, 
-                            pollo desmechado y carne molida. Lleva estos deliciosos 50 productos  por 50mil
-                        </p>
-                        <div class="card-price">$50.000</div>
-                        <div class="card-features">
-                            <span><i class="fas fa-bolt"></i> Express</span>
-                            <span><i class="fas fa-briefcase"></i> Ejecutivo</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Combo 14 -->
-                <div class="combo-card">
-                    <div class="card-image">
-                        <img src="images/Pipian.jpg" alt="Combo tradicional Bocado" />
-                        <div class="card-overlay">
-                            <button class="btn-card" onclick="contactarWhatsApp('Combo tradicional Bocado')">
-                                <i class="fab fa-whatsapp"></i> Pedir
-                            </button>
-                        </div>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">Combo tradicional Bocado</h3>
-                        <p class="card-description">
-                            Lleva 30 deliciosas empanadas tradicionales en tamaño BOCADO. Disfrutalas acompañadas de aji criollo y nuestra espectacular salsa casera tipo chimichurri.
-                        </p>
-                        <div class="card-price">$50.000</div>
-                        <div class="card-features">
-                            <span><i class="fas fa-bolt"></i> Express</span>
-                            <span><i class="fas fa-briefcase"></i> Ejecutivo</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Combo 15 -->
-                <div class="combo-card">
-                    <div class="card-image">
-                        <img src="images/Pipian.jpg" alt="Combo Arepitas mini" />
-                        <div class="card-overlay">
-                            <button class="btn-card" onclick="contactarWhatsApp('Combo Arepitas mini')">
-                                <i class="fab fa-whatsapp"></i> Pedir
-                            </button>
-                        </div>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">Combo Arepitas mini</h3>
-                        <p class="card-description">
-                            Disfruta de 20 deliciosas arepitas de huevo de codorniz trifasicas, con pollo desmechado y carne molida. ¡Que mejor compañía que nuestra salsa casera y aji criollo para esta pequeñas arepas!
-                        </p>
-                        <div class="card-price">$50.000</div>
-                        <div class="card-features">
-                            <span><i class="fas fa-bolt"></i> Express</span>
-                            <span><i class="fas fa-briefcase"></i> Ejecutivo</span>
-                        </div>
-                    </div>
-                </div>        
-    </section>
-
-    <!-- Sección Contacto -->
+    // Cambio automático de sliders
+    function autoCarousel() {
+        const carousels = document.querySelectorAll('.card-carousel');
+        carousels.forEach(carousel => {
+            const imgs = carousel.querySelectorAll('.carousel-img');
+            let idx = Array.from(imgs).findIndex(img => img.classList.contains('active'));
+            imgs[idx].classList.remove('active');
+            idx = (idx + 1) % imgs.length;
+            imgs[idx].classList.add('active');
+        });
+    }
+    setInterval(autoCarousel, 3000);
+    </script>
     <section id="contacto" class="contact-section">
         <div class="container">
             <div class="section-header">
@@ -644,7 +379,7 @@
                     <h4>Enlaces Rápidos</h4>
                     <ul class="footer-links">
                         <li><a href="#inicio">Inicio</a></li>
-                        <li><a href="#combos">Nuestros Combos</a></li>
+                        <!-- Enlace a Nuestros Combos eliminado -->
                         <li><a href="#contacto">Contacto</a></li>
                         <li><a href="#historia">Nuestra Historia</a></li>
                     </ul>
