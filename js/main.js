@@ -587,81 +587,6 @@ function shareOnSocial(platform, text = '', url = '') {
     }
 }
 
-// ===== SISTEMA DE BÚSQUEDA EN COMBOS =====
-function initSearchSystem() {
-    const searchInput = document.createElement('input');
-    searchInput.type = 'text';
-    searchInput.placeholder = 'Buscar combos...';
-    searchInput.className = 'combo-search';
-    searchInput.style.cssText = `
-        width: 100%;
-        max-width: 400px;
-        padding: 0.8rem 1.2rem;
-        border: 2px solid var(--primary-gold);
-        border-radius: 25px;
-        font-size: 1rem;
-        margin: 1rem auto;
-        display: block;
-        background: white;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    `;
-    
-    const combosSection = document.querySelector('.combos-section .container');
-    if (combosSection && document.querySelectorAll('.combo-card').length > 6) {
-        combosSection.insertBefore(searchInput, combosSection.querySelector('.combos-grid'));
-        
-        searchInput.addEventListener('input', debounce(function(e) {
-            filterCombosBySearch(e.target.value);
-        }, 300));
-    }
-}
-
-function filterCombosBySearch(searchTerm) {
-    const cards = document.querySelectorAll('.combo-card');
-    const term = searchTerm.toLowerCase().trim();
-    let visibleCount = 0;
-    
-    cards.forEach(card => {
-        const title = card.querySelector('.card-title').textContent.toLowerCase();
-        const description = card.querySelector('.card-description').textContent.toLowerCase();
-        const isVisible = title.includes(term) || description.includes(term);
-        
-        card.style.display = isVisible ? 'block' : 'none';
-        if (isVisible) visibleCount++;
-    });
-    
-    // Mostrar mensaje si no hay resultados
-    updateSearchResults(visibleCount, term);
-}
-
-function updateSearchResults(count, term) {
-    let messageElement = document.querySelector('.search-results-message');
-    
-    if (count === 0 && term) {
-        if (!messageElement) {
-            messageElement = document.createElement('div');
-            messageElement.className = 'search-results-message';
-            messageElement.style.cssText = `
-                text-align: center;
-                padding: 2rem;
-                color: var(--text-light);
-                font-size: 1.1rem;
-            `;
-            document.querySelector('.combos-grid').after(messageElement);
-        }
-        messageElement.innerHTML = `
-            <i class="fas fa-search" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.3;"></i>
-            <p>No se encontraron combos para "${term}"</p>
-            <p style="font-size: 0.9rem; margin-top: 0.5rem;">Intenta con otros términos de búsqueda</p>
-        `;
-        messageElement.style.display = 'block';
-    } else {
-        if (messageElement) {
-            messageElement.style.display = 'none';
-        }
-    }
-}
-
 // ===== SISTEMA DE FAVORITOS LOCAL =====
 const FavoritesManager = {
     key: 'bocaditos-favoritos',
@@ -706,7 +631,8 @@ const FavoritesManager = {
             const comboId = `combo-${index}`;
             const isFav = this.isFavorite(comboId);
             let favBtn = card.querySelector('.favorite-btn');
-            
+            const cardImage = card.querySelector('.card-image');
+            if (!cardImage) return; // Solo agregar botón si existe .card-image
             if (!favBtn) {
                 favBtn = document.createElement('button');
                 favBtn.className = 'favorite-btn';
@@ -724,13 +650,11 @@ const FavoritesManager = {
                     transition: all 0.3s ease;
                     z-index: 10;
                 `;
-                card.querySelector('.card-image').appendChild(favBtn);
-                
+                cardImage.appendChild(favBtn);
                 favBtn.addEventListener('click', (e) => {
                     e.stopPropagation();
                     const title = card.querySelector('.card-title').textContent;
                     const price = card.querySelector('.card-price').textContent;
-                    
                     if (this.isFavorite(comboId)) {
                         this.removeFavorite(comboId);
                     } else {
@@ -738,7 +662,6 @@ const FavoritesManager = {
                     }
                 });
             }
-            
             favBtn.style.color = isFav ? '#ef4444' : '#6b7280';
             favBtn.style.transform = isFav ? 'scale(1.1)' : 'scale(1)';
         });
@@ -970,7 +893,6 @@ window.RatingSystem = RatingSystem;
 function initPageSpecificFeatures() {
     // Para página de combos
     if (document.querySelector('.combos-section')) {
-        initSearchSystem();
         FavoritesManager.updateFavoriteButtons();
         RatingSystem.addRatingStars();
     }

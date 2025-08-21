@@ -197,14 +197,12 @@
             <div class="menu-bebidas-cards">
                 <!-- Tarjeta Bebidas calientes -->
                 <div class="combo-card menu-bebidas-card">
-                    <div class="card-carousel">
-                        <button class="carousel-btn prev" onclick="moveCarousel(this, -1)">&#10094;</button>
+                    <div class="card-carousel vertical-carousel">
                         <div class="carousel-track">
                             <img src="images/Combo_Arepas.jpg" alt="Bebida caliente 1" class="carousel-img active">
                             <img src="images/Logo.jpg" alt="Bebida caliente 2" class="carousel-img">
                             <img src="images/Arepas_huevo_Trisafica.jpg" alt="Bebida caliente 3" class="carousel-img">
                         </div>
-                        <button class="carousel-btn next" onclick="moveCarousel(this, 1)">&#10095;</button>
                     </div>
                     <div class="card-content">
                         <h2 class="card-title">Bebidas Calientes ☕</h2>
@@ -224,14 +222,12 @@
                 
                 <!-- Tarjeta Bebidas frías -->
                 <div class="combo-card menu-bebidas-card fria">
-                    <div class="card-carousel">
-                        <button class="carousel-btn prev" onclick="moveCarousel(this, -1)">&#10094;</button>
+                    <div class="card-carousel horizontal-carousel">
                         <div class="carousel-track">
                             <img src="images/Combo_valluno.jpg" alt="Bebida fría 1" class="carousel-img active">
                             <img src="images/Pipian.jpg" alt="Bebida fría 2" class="carousel-img">
                             <img src="images/Vegetarianas.jpg" alt="Bebida fría 3" class="carousel-img">
                         </div>
-                        <button class="carousel-btn next" onclick="moveCarousel(this, 1)">&#10095;</button>
                     </div>
                     <div class="card-content">
                         <h2 class="card-title">Bebidas Frías 🧊</h2>
@@ -254,14 +250,12 @@
                 
                 <!-- Tarjeta Oferta saludable -->
                 <div class="combo-card menu-bebidas-card saludable">
-                    <div class="card-carousel">
-                        <button class="carousel-btn prev" onclick="moveCarousel(this, -1)">&#10094;</button>
+                    <div class="card-carousel fade-carousel">
                         <div class="carousel-track">
                             <img src="images/Vegetarianas.jpg" alt="Saludable 1" class="carousel-img active">
                             <img src="images/Combo_Arepas.jpg" alt="Saludable 2" class="carousel-img">
                             <img src="images/Combo_valluno.jpg" alt="Saludable 3" class="carousel-img">
                         </div>
-                        <button class="carousel-btn next" onclick="moveCarousel(this, 1)">&#10095;</button>
                     </div>
                     <div class="card-content">
                         <h2 class="card-title">Oferta Saludable 🥗</h2>
@@ -424,7 +418,7 @@
                         
                         <div class="social-links">
                             <a href="https://www.facebook.com/Bocaditos-Criollos-1487704988144414/" class="social-link" target="_blank"><i class="fab fa-facebook"></i></a>
-                            <a href="#" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
+                            <a href="https://www.instagram.com/bocaditoscriollos/" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
                             <a href="https://wa.me/573138513658" class="social-link" target="_blank"><i class="fab fa-whatsapp"></i></a>
                         </div>
                     </div>
@@ -433,13 +427,7 @@
                 <div class="contact-map">
                     <div class="map-container">
                         <iframe 
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.9658!2d-74.1109734!3d4.6581!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNMKwMzknMzMuMiJOIDc0wrAwNic0Mi42Ilc!5e0!3m2!1sen!2sco!4v1234567890"
-                            width="100%" 
-                            height="450" 
-                            style="border:0;" 
-                            allowfullscreen="" 
-                            loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.4484692824312!2d-74.11208889710932!3d4.691867141736017!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f9b4379cc22dd%3A0x5eb98b4be50d6267!2zQ3JhLiA4NyAjIDY4LTkxLCBFbmdhdGl2w6EsIEJvZ290w6EsIEQuQy4sIEJvZ290w6EsIEJvZ290w6EsIEQuQy4sIENvbG9tYmlh!5e0!3m2!1ses!2sus!4v1755798309067!5m2!1ses!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                         </iframe>
                     </div>
                 </div>
@@ -516,29 +504,102 @@
     <!-- JavaScript -->
     <script src="js/main.js"></script>
     <script src="js/hero-slider.js"></script>
+    <style>
+    .vertical-carousel .carousel-track {
+        position: relative;
+        width: 180px;
+        height: 120px;
+        overflow: hidden;
+    }
+    .vertical-carousel .carousel-img {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0;
+        transform: translateY(40px);
+        transition: opacity 1.5s cubic-bezier(0.4,0,0.2,1), transform 1.5s cubic-bezier(0.4,0,0.2,1);
+        z-index: 1;
+    }
+    .vertical-carousel .carousel-img.active {
+        opacity: 1;
+        transform: translateY(0);
+        z-index: 2;
+    }
+    .horizontal-carousel .carousel-track {
+        position: relative;
+        width: 180px;
+        height: 120px;
+        overflow: hidden;
+    }
+    .horizontal-carousel .carousel-img {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0;
+        transform: translateX(40px);
+        transition: opacity 1.5s cubic-bezier(0.4,0,0.2,1), transform 1.5s cubic-bezier(0.4,0,0.2,1);
+        z-index: 1;
+    }
+    .horizontal-carousel .carousel-img.active {
+        opacity: 1;
+        transform: translateX(0);
+        z-index: 2;
+    }
+    .fade-carousel .carousel-track {
+        position: relative;
+        width: 180px;
+        height: 120px;
+        overflow: hidden;
+    }
+    .fade-carousel .carousel-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0;
+        transition: opacity 2s cubic-bezier(0.4,0,0.2,1);
+        z-index: 1;
+    }
+    .fade-carousel .carousel-img.active {
+        opacity: 1;
+        z-index: 2;
+    }
+    </style>
     <script>
-        // Funcionalidad del carrusel de menú bebidas
-        function moveCarousel(btn, dir) {
-            const carousel = btn.closest('.card-carousel');
+    // Carrusel automático con efectos personalizados
+    function autoCustomCarousel() {
+        // Vertical
+        document.querySelectorAll('.vertical-carousel').forEach(carousel => {
             const imgs = carousel.querySelectorAll('.carousel-img');
             let idx = Array.from(imgs).findIndex(img => img.classList.contains('active'));
             imgs[idx].classList.remove('active');
-            idx = (idx + dir + imgs.length) % imgs.length;
+            idx = (idx + 1) % imgs.length;
             imgs[idx].classList.add('active');
-        }
-
-        // Cambio automático de sliders
-        function autoCarousel() {
-            const carousels = document.querySelectorAll('.card-carousel');
-            carousels.forEach(carousel => {
-                const imgs = carousel.querySelectorAll('.carousel-img');
-                let idx = Array.from(imgs).findIndex(img => img.classList.contains('active'));
-                imgs[idx].classList.remove('active');
-                idx = (idx + 1) % imgs.length;
-                imgs[idx].classList.add('active');
-            });
-        }
-        setInterval(autoCarousel, 4000);
+        });
+        // Horizontal
+        document.querySelectorAll('.horizontal-carousel').forEach(carousel => {
+            const imgs = carousel.querySelectorAll('.carousel-img');
+            let idx = Array.from(imgs).findIndex(img => img.classList.contains('active'));
+            imgs[idx].classList.remove('active');
+            idx = (idx + 1) % imgs.length;
+            imgs[idx].classList.add('active');
+        });
+        // Fade
+        document.querySelectorAll('.fade-carousel').forEach(carousel => {
+            const imgs = carousel.querySelectorAll('.carousel-img');
+            let idx = Array.from(imgs).findIndex(img => img.classList.contains('active'));
+            imgs[idx].classList.remove('active');
+            idx = (idx + 1) % imgs.length;
+            imgs[idx].classList.add('active');
+        });
+    }
+    setInterval(autoCustomCarousel, 6000);
     </script>
 </body>
 </html>

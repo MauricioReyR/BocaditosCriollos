@@ -1,3 +1,106 @@
+.menu-bebidas-card.fria .card-title,
+.menu-bebidas-card.fria .menu-list,
+.menu-bebidas-card.saludable .card-title,
+.menu-bebidas-card.saludable .menu-list {
+    color: #2C1810 !important;
+    text-shadow: 1px 1px 8px #fff, 0 2px 8px rgba(0,0,0,0.10);
+    font-weight: bold;
+}
+.menu-bebidas-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+.menu-bebidas-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    align-items: stretch;
+    min-height: 400px;
+    position: relative;
+    height: 100%;
+}
+.menu-bebidas-card .card-carousel {
+    flex-shrink: 0;
+    min-height: 120px;
+    max-height: 140px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.menu-bebidas-card .card-content {
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+}
+.menu-bebidas-card.vertical-carousel .card-carousel {
+    order: 0;
+    margin-bottom: 1rem;
+}
+.menu-bebidas-card.vertical-carousel .card-content {
+    order: 1;
+}
+.menu-bebidas-card.horizontal-carousel .card-carousel {
+    order: 1;
+    margin: 1rem 0;
+}
+.menu-bebidas-card.horizontal-carousel .card-content {
+    order: 0;
+}
+.menu-bebidas-card.fade-carousel .card-carousel {
+    order: 2;
+    margin-top: 1rem;
+}
+.menu-bebidas-card.fade-carousel .card-content {
+    order: 0;
+}
+.menu-bebidas-card .card-carousel img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+    transition: transform 0.3s ease;
+}
+.menu-bebidas-card .card-carousel {
+    flex-shrink: 0;
+}
+.menu-bebidas-card .card-content {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.menu-bebidas-card.vertical-carousel {
+    justify-content: flex-start;
+}
+.menu-bebidas-card.horizontal-carousel {
+    justify-content: center;
+}
+.menu-bebidas-card.fade-carousel {
+    justify-content: flex-end;
+}
+.menu-bebidas-section .section-subtitle {
+    color: var(--dark-brown);
+    text-shadow: 1px 1px 6px rgba(255,255,255,0.7), 0 2px 8px rgba(0,0,0,0.10);
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+.menu-bebidas-section .card-title {
+    color: var(--secondary-red);
+    text-shadow: 1px 1px 6px rgba(255,255,255,0.7), 0 2px 8px rgba(0,0,0,0.10);
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+.menu-bebidas-section .section-title {
+    color: var(--primary-gold);
+    text-shadow: 1px 1px 6px rgba(255,255,255,0.7), 0 2px 8px rgba(0,0,0,0.10);
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
 /* ===== VARIABLES CSS MEJORADAS ===== */
 :root {
     /* Paleta de colores mejorada basada en colores colombianos */
